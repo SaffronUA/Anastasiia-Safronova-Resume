@@ -54,3 +54,43 @@ transition: transform 0.5s ease-in-out;
     cursor: default;
 }
 
+```css
+.job-toggle {
+cursor: pointer; /* Змінює курсор на вказівник при наведенні /
+transition: background-color 0.2s ease-in-out; / Додає плавний перехід для зміни фону /
+padding: 0.5rem 0; / Додає невеликі внутрішні відступи /
+margin-bottom: 0.5rem; / Додає невеликі зовнішні відступи знизу */
+}
+
+.job-toggle:hover {
+background-color: #f9f9f9; /* Змінює колір фону при наведенні /
+border-radius: 0.5rem; / Заокруглює кути при наведенні */
+}
+
+.timeline-item {
+position: relative;
+padding-left: 3rem; /* Збільшує відступ зліва для елементів часової шкали */
+}
+
+.timeline-item::before {
+content: '';
+position: absolute;
+left: -0.75rem; /* Коригує положення булету /
+top: 0.5rem; / Коригує вертикальне положення булету /
+width: 10px; / Зменшує розмір булету /
+height: 10px; / Зменшує розмір булету /
+border-radius: 50%;
+background-color: #a90534; / Змінює колір булету /
+border: none; / Видаляє облямівку булету */
+}
+
+.border-dashed {
+border-left-width: 1px; /* Зменшує товщину пунктирної лінії /
+margin-left: 1rem; / Додає відступ для пунктирної лінії /
+padding-bottom: 1rem; / Додає відступ знизу для пунктирної лінії */
+}
+
+.timeline-item:last-child .border-dashed {
+padding-bottom: 0; /* Прибирає зайвий відступ у останнього елементу */
+}
+```
