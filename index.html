@@ -1,10 +1,5 @@
 <!DOCTYPE html>
 <html lang="uk">
-<nav class="lang-switcher">
-    <a href="index.html" class="active">Укр</a>
-    |
-    <a href="index-en.html">Eng</a>
-</nav>
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -303,7 +298,11 @@ transition: transform 0.5s ease-in-out;
                 <span>📍 Дніпро, Україна</span>
             </div>
         </header>
-
+<nav class="lang-switcher absolute top-4 right-4 text-sm font-semibold">
+    <a href="index.html" class="active text-[#a90534]">Укр</a>
+    <span class="text-gray-400">|</span>
+    <a href="index-en.html" class="hover:text-[#a90534]">Eng</a>
+</nav>
         <!-- Professional Summary -->
         <section class="card">
             <h2 class="section-title text-2xl font-semibold">Професійний огляд</h2>
@@ -777,6 +776,7 @@ transition: transform 0.5s ease-in-out;
 </script>
 </body>
 </html>
+
 
 
 
