@@ -538,8 +538,45 @@
             });
         });
     </script>
+<script>
+    // Отримання модального вікна
+    var modal = document.getElementById("imageModal");
+
+    // Отримання зображення та підпису в модальному вікні
+    var modalImg = document.getElementById("modalImage");
+    var captionText = document.getElementById("caption");
+
+    // Отримання всіх посилань на зображення
+    var links = document.getElementsByClassName("portfolio-link");
+
+    // Цикл по всіх посиланнях і додавання обробника подій
+    for (var i = 0; i < links.length; i++) {
+        links[i].onclick = function(event) {
+            event.preventDefault();
+            modal.style.display = "block";
+            modalImg.src = this.getAttribute("data-fullsize");
+            captionText.innerHTML = this.getAttribute("data-title");
+        }
+    }
+
+    // Отримання кнопки закриття (x)
+    var span = document.getElementsByClassName("close")[0];
+
+    // Коли користувач клікає на (x), закрити модальне вікно
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Закрити модальне вікно, якщо клік поза зображенням
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
 </body>
 </html>
+
 
 
 
