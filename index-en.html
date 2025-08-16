@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Resume | Anastasiia Safronova</title>
@@ -99,7 +99,7 @@
         color: white;
     }
 
-    /* Portfolio styles */
+    /* Styles for Portfolio, which you need */
     .portfolio-section {
         padding: 60px 0;
         background-color: #f4f7f6;
@@ -127,9 +127,7 @@
     }
     .portfolio-item img {
         width: 100%;
-        height: 150px;
-        object-fit: cover;
-        object-position: center;
+        height: auto;
         display: block;
         transition: transform 0.5s ease-in-out;
     }
@@ -147,7 +145,7 @@
         font-size: 0.9em;
         color: #555;
     }
-    /* Modal styles */
+    /* Modal styles (for popup window) */
     .modal {
         display: none;
         position: fixed;
@@ -192,29 +190,102 @@
         text-decoration: none;
         cursor: pointer;
     }
-    .lang-switcher {
-        text-align: right;
-        padding: 1rem;
+ .portfolio-section {
+        padding: 60px 0;
+        background-color: #f4f7f6;
+        text-align: center;
     }
-    .lang-switcher a {
-        text-decoration: none;
-        color: #4b066d;
+    .portfolio-section .section-title {
+        margin-bottom: 40px;
+    }
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        padding: 0 20px;
+    }
+    .portfolio-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+    .portfolio-item:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+.portfolio-item img {
+    width: 100%;
+    height: 150px;
+object-fit: cover;
+object-position: center;
+display: block;
+transition: transform 0.5s ease-in-out;
+}
+    .portfolio-info {
+        padding: 15px;
+        text-align: center;
+        background-color: #fff;
+    }
+    .portfolio-info h3 {
+        margin: 0 0 5px 0;
+        font-size: 1.2em;
+    }
+    .portfolio-info p {
+        margin: 0;
+        font-size: 0.9em;
+        color: #555;
+    }
+    /* Styles for modal window */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.9);
+        padding-top: 60px;
+    }
+    .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 1200px;
+        border-radius: 8px;
+    }
+    #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 1200px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+    }
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
         font-weight: bold;
-        padding: 0 5px;
+        transition: 0.3s;
     }
-    .lang-switcher a.active {
-        color: #a90534;
-        cursor: default;
+    .close:hover,
+    .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
     }
 </style>
     
 </head>
 <body class="antialiased">
-    <nav class="lang-switcher">
-        <a href="index.html">Укр</a>
-        |
-        <a href="index-en.html" class="active">Eng</a>
-    </nav>
     <div class="container mx-auto space-y-12 py-12 px-4 sm:px-6 lg:px-8">
 
         <header class="text-center">
@@ -226,7 +297,11 @@
                 <span>📍 Dnipro, Ukraine</span>
             </div>
         </header>
-
+<nav class="lang-switcher absolute top-4 right-4 text-sm font-semibold">
+    <a href="index.html" class="hover:text-[#a90534]">Укр</a>
+    <span class="text-gray-400">|</span>
+    <a href="index-en.html" class="active text-[#a90534]">Eng</a>
+</nav>
         <section class="card">
             <h2 class="section-title text-2xl font-semibold">Professional Summary</h2>
             <p class="text-gray-700 leading-relaxed">
@@ -254,7 +329,7 @@
                 <span class="skill-badge" data-category="marketing">Project Management</span>
                 
                 <span class="skill-badge" data-category="content">Article & Blog Post Writing</span>
-                <span class="skill-badge" data-category="content">Video Script Creation</span>
+                <span class="skill-badge" data-category="content">Video Scripting</span>
                 <span class="skill-badge" data-category="content">Image & Video Creation</span>
                 <span class="skill-badge" data-category="content">Retouching</span>
                 <span class="skill-badge" data-category="content">Photography</span>
@@ -273,175 +348,175 @@
             </div>
         </section>
 
-       <section class="card">
-    <h2 class="section-title text-2xl font-semibold">Work Experience</h2>
-    <div class="relative pl-10 border-l-2 border-dashed border-gray-300">
-        <div class="timeline-item mb-8">
-            <div class="cursor-pointer job-toggle">
-                <h3 class="text-lg font-semibold text-gray-800">Freelancer</h3>
-                <p class="text-md text-gray-600">Self-employed</p>
-                <p class="text-sm text-gray-500">May 2025 – Present</p>
+        <section class="card">
+            <h2 class="section-title text-2xl font-semibold">Work Experience</h2>
+            <div class="relative pl-10 border-l-2 border-dashed border-gray-300">
+                <div class="timeline-item mb-8">
+                    <div class="cursor-pointer job-toggle">
+                        <h3 class="text-lg font-semibold text-gray-800">Freelancer</h3>
+                        <p class="text-md text-gray-600">Self-employed</p>
+                        <p class="text-sm text-gray-500">May 2025 – Present</p>
+                    </div>
+                    <div class="details-content">
+                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                            <li>Independently managed projects, time, and client communication.</li>
+                            <li>Utilized SEO and content marketing skills for various projects.</li>
+                            <li>Implemented comprehensive strategies to increase online presence.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item mb-8">
+                    <div class="cursor-pointer job-toggle">
+                        <h3 class="text-lg font-semibold text-gray-800">Content and SEO Specialist</h3>
+                        <p class="text-md text-gray-600">Compare The Carrier</p>
+                        <p class="text-sm text-gray-500">Dec 2021 – May 2025</p>
+                    </div>
+                    <div class="details-content">
+                        <p class="text-gray-700 leading-relaxed">
+                            As a Content and SEO Specialist, my role encompassed a wide range of tasks aimed at improving digital presence and organic search performance. I was responsible for creating, optimizing, and managing content across various platforms, including articles, blog posts, and web pages. My work contributed to increased visibility, improved keyword rankings, and enhanced user engagement for key projects in the transportation and logistics sectors.
+                        </p>
+                        <h4 class="text-lg font-semibold text-gray-800 mt-4">Key Responsibilities and Achievements:</h4>
+                        
+                        <h5 class="text-md font-semibold text-gray-700 mt-2">Content Creation & Management:</h5>
+                        <ul class="mt-2 list-disc list-inside text-gray-600 space-y-1">
+                            <li>Created content for various digital platforms, including video scripts and concepts, short social media videos, text for new pages and B2B communications, and social media content.</li>
+                            <li>Managed the publication and optimization process, including adding photos, videos, and updating existing articles.</li>
+                        </ul>
+                        
+                        <h5 class="text-md font-semibold text-gray-700 mt-2">Search Engine Optimization (SEO):</h5>
+                        <ul class="mt-2 list-disc list-inside text-gray-600 space-y-1">
+                            <li>Implemented comprehensive SEO strategies, including keyword research and competitor analysis.</li>
+                            <li>Managed link-building campaigns and conducted technical SEO audits.</li>
+                            <li>Monitored and reported on key performance indicators (SEO and SMM reports).</li>
+                            <li>Tracked current trends in SEO.</li>
+                            <li>Developed infographics and visual materials for content.</li>
+                            <li>Managed on-page SEO.</li>
+                        </ul>
+                        
+                        <h5 class="text-md font-semibold text-gray-700 mt-2">Project & Task Coordination:</h5>
+                        <ul class="mt-2 list-disc list-inside text-gray-600 space-y-1">
+                            <li>Organized and managed weekly tasks in Asana.</li>
+                            <li>Provided regular reports on work progress.</li>
+                            <li>Collaborated with team members.</li>
+                            <li>Prepared and delivered presentations on SEO strategies.</li>
+                            <li>Managed and organized content materials.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item mb-8">
+                    <div class="cursor-pointer job-toggle">
+                        <h3 class="text-lg font-semibold text-gray-800">Trade Marketer</h3>
+                        <p class="text-md text-gray-600">DTI, Dnipro</p>
+                        <p class="text-sm text-gray-500">Jun 2020 – Apr 2021</p>
+                    </div>
+                    <div class="details-content">
+                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                            <li>Controlled the availability of marketing products, ordered them, found suppliers, and developed and maintained registries.</li>
+                            <li>Evaluated video materials and managed YouTube channels.</li>
+                            <li>Filled websites with information on OkayCMS and OpenCart platforms.</li>
+                            <li>Accepted branding briefs and delegated tasks to designers and printing services.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item mb-8">
+                    <div class="cursor-pointer job-toggle">
+                        <h3 class="text-lg font-semibold text-gray-800">Administrator</h3>
+                        <p class="text-md text-gray-600">Yoga Center "Selfcentr", Dnipro</p>
+                        <p class="text-sm text-gray-500">Dec 2019 – Apr 2020</p>
+                    </div>
+                    <div class="details-content">
+                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                            <li>Managed attendance statistics and sales of memberships.</li>
+                            <li>Created schedules and handled financial reporting.</li>
+                            <li>Ensured premises cleanliness and ordered household goods.</li>
+                        </ul>
+                    </div>
+                </div>
+                 <div class="timeline-item mb-8">
+                    <div class="cursor-pointer job-toggle">
+                        <h3 class="text-lg font-semibold text-gray-800">Service Specialist</h3>
+                        <p class="text-md text-gray-600">JSC "Universal Bank", Monobank Project</p>
+                        <p class="text-sm text-gray-500">Jun 2019 – Aug 2019</p>
+                    </div>
+                    <div class="details-content">
+                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                            <li>Provided customer service via phone and chat, offering necessary information.</li>
+                            <li>Effectively resolved customer issues.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item mb-8">
+                    <div class="cursor-pointer job-toggle">
+                        <h3 class="text-lg font-semibold text-gray-800">Barista</h3>
+                        <p class="text-md text-gray-600">«LoveKava», Dnipro</p>
+                        <p class="text-sm text-gray-500">Feb 2019 – Jun 2019</p>
+                    </div>
+                    <div class="details-content">
+                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                            <li>Prepared coffee and related products.</li>
+                            <li>Managed financial reporting.</li>
+                            <li>Offered creative suggestions for the coffee shop.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item mb-8">
+                    <div class="cursor-pointer job-toggle">
+                        <h3 class="text-lg font-semibold text-gray-800">Translator</h3>
+                        <p class="text-md text-gray-600">Self-employed</p>
+                        <p class="text-sm text-gray-500">Jan 2017 – Present</p>
+                    </div>
+                    <div class="details-content">
+                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                            <li>Translated texts on various topics, including educational materials and product descriptions.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item mb-8">
+                    <div class="cursor-pointer job-toggle">
+                        <h3 class="text-lg font-semibold text-gray-800">Restaurant Crew Member</h3>
+                        <p class="text-md text-gray-600">McDonald's, Dnipro</p>
+                        <p class="text-sm text-gray-500">Mar 2016 – Oct 2017</p>
+                    </div>
+                    <div class="details-content">
+                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                            <li>Worked effectively in a team and maintained high standards.</li>
+                            <li>Prepared products according to company standards.</li>
+                            <li>Provided customer service and maintained a clean work area.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item mb-8">
+                    <div class="cursor-pointer job-toggle">
+                        <h3 class="text-lg font-semibold text-gray-800">English Language Tutor</h3>
+                        <p class="text-md text-gray-600">Self-employed</p>
+                        <p class="text-sm text-gray-500">Sep 2015 – Present</p>
+                    </div>
+                    <div class="details-content">
+                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                            <li>Selected teaching materials and assisted with homework.</li>
+                            <li>Used creative teaching methods, including analyzing series and songs.</li>
+                        </ul>
+                    </div>
+                </div>
+                 <div class="timeline-item mb-8">
+                    <div class="cursor-pointer job-toggle">
+                        <h3 class="text-lg font-semibold text-gray-800">Event Organizer</h3>
+                        <p class="text-md text-gray-600">Self-employed</p>
+                        <p class="text-sm text-gray-500">Nov 2014 – Present </p>
+                    </div>
+                    <div class="details-content">
+                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                            <li>Negotiated and concluded contracts with landlords and sponsors.</li>
+                            <li>Developed event scenarios and programs, and found participants.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="details-content">
-                <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
-                    <li>Independently managed projects, time, and client communication.</li>
-                    <li>Utilized SEO and content marketing skills for various projects.</li>
-                    <li>Implemented comprehensive strategies to increase online presence.</li>
-                </ul>
-            </div>
-        </div>
-        <div class="timeline-item mb-8">
-            <div class="cursor-pointer job-toggle">
-                <h3 class="text-lg font-semibold text-gray-800">Content and SEO Specialist</h3>
-                <p class="text-md text-gray-600">Compare The Carrier</p>
-                <p class="text-sm text-gray-500">Dec 2021 – May 2025</p>
-            </div>
-            <div class="details-content">
-                <p class="text-gray-700 leading-relaxed">
-                    As a Content and SEO Specialist, my role encompassed a wide range of tasks aimed at improving digital presence and organic search performance. I was responsible for creating, optimizing, and managing content across various platforms, including articles, blog posts, and web pages. My work contributed to increased visibility, improved keyword rankings, and enhanced user engagement for key projects in the transportation and logistics sectors.
-                </p>
-                <h4 class="text-lg font-semibold text-gray-800 mt-4">Key Responsibilities and Achievements:</h4>
-
-                <h5 class="text-md font-semibold text-gray-700 mt-2">Content Creation & Management:</h5>
-                <ul class="mt-2 list-disc list-inside text-gray-600 space-y-1">
-                    <li>Created content for various digital platforms, including video scripts and concepts, short social media videos, text for new pages and B2B communications, and social media content.</li>
-                    <li>Managed the publication and optimization process, including adding photos, videos, and updating existing articles.</li>
-                </ul>
-
-                <h5 class="text-md font-semibold text-gray-700 mt-2">Search Engine Optimization (SEO):</h5>
-                <ul class="mt-2 list-disc list-inside text-gray-600 space-y-1">
-                    <li>Implemented comprehensive SEO strategies, including keyword research and competitor analysis.</li>
-                    <li>Managed link-building campaigns and conducted technical SEO audits.</li>
-                    <li>Monitored and reported on key performance indicators (SEO and SMM reports).</li>
-                    <li>Tracked current trends in SEO.</li>
-                    <li>Developed infographics and visual materials for content.</li>
-                    <li>Managed on-page SEO.</li>
-                </ul>
-
-                <h5 class="text-md font-semibold text-gray-700 mt-2">Project & Task Coordination:</h5>
-                <ul class="mt-2 list-disc list-inside text-gray-600 space-y-1">
-                    <li>Organized and managed weekly tasks in Asana.</li>
-                    <li>Provided regular reports on work progress.</li>
-                    <li>Collaborated with team members.</li>
-                    <li>Prepared and delivered presentations on SEO strategies.</li>
-                    <li>Managed and organized content materials.</li>
-                </ul>
-            </div>
-        </div>
-        <div class="timeline-item mb-8">
-            <div class="cursor-pointer job-toggle">
-                <h3 class="text-lg font-semibold text-gray-800">Trade Marketer</h3>
-                <p class="text-md text-gray-600">DTI, Dnipro</p>
-                <p class="text-sm text-gray-500">Jun 2020 – Apr 2021</p>
-            </div>
-            <div class="details-content">
-                <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
-                    <li>Controlled the availability of marketing products, ordered them, found suppliers, and developed and maintained registries.</li>
-                    <li>Evaluated video materials and managed YouTube channels.</li>
-                    <li>Filled websites with information on OkayCMS and OpenCart platforms.</li>
-                    <li>Accepted branding briefs and delegated tasks to designers and printing services.</li>
-                </ul>
-            </div>
-        </div>
-        <div class="timeline-item mb-8">
-            <div class="cursor-pointer job-toggle">
-                <h3 class="text-lg font-semibold text-gray-800">Administrator</h3>
-                <p class="text-md text-gray-600">Yoga Center "Selfcentr", Dnipro</p>
-                <p class="text-sm text-gray-500">Dec 2019 – Apr 2020</p>
-            </div>
-            <div class="details-content">
-                <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
-                    <li>Managed attendance statistics and sales of memberships.</li>
-                    <li>Created schedules and handled financial reporting.</li>
-                    <li>Ensured premises cleanliness and ordered household goods.</li>
-                </ul>
-            </div>
-        </div>
-        <div class="timeline-item mb-8">
-            <div class="cursor-pointer job-toggle">
-                <h3 class="text-lg font-semibold text-gray-800">Service Specialist</h3>
-                <p class="text-md text-gray-600">JSC "Universal Bank", Monobank Project</p>
-                <p class="text-sm text-gray-500">Jun 2019 – Aug 2019</p>
-            </div>
-            <div class="details-content">
-                <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
-                    <li>Provided customer service via phone and chat, offering necessary information.</li>
-                    <li>Effectively resolved customer issues.</li>
-                </ul>
-            </div>
-        </div>
-        <div class="timeline-item mb-8">
-            <div class="cursor-pointer job-toggle">
-                <h3 class="text-lg font-semibold text-gray-800">Barista</h3>
-                <p class="text-md text-gray-600">«LoveKava», Dnipro</p>
-                <p class="text-sm text-gray-500">Feb 2019 – Jun 2019</p>
-            </div>
-            <div class="details-content">
-                <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
-                    <li>Prepared coffee and related products.</li>
-                    <li>Managed financial reporting.</li>
-                    <li>Offered creative suggestions for the coffee shop.</li>
-                </ul>
-            </div>
-        </div>
-        <div class="timeline-item mb-8">
-            <div class="cursor-pointer job-toggle">
-                <h3 class="text-lg font-semibold text-gray-800">Translator</h3>
-                <p class="text-md text-gray-600">Self-employed</p>
-                <p class="text-sm text-gray-500">Jan 2017 – Present</p>
-            </div>
-            <div class="details-content">
-                <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
-                    <li>Translated texts on various topics, including educational materials and product descriptions.</li>
-                </ul>
-            </div>
-        </div>
-        <div class="timeline-item mb-8">
-            <div class="cursor-pointer job-toggle">
-                <h3 class="text-lg font-semibold text-gray-800">Restaurant Crew Member</h3>
-                <p class="text-md text-gray-600">McDonald's, Dnipro</p>
-                <p class="text-sm text-gray-500">Mar 2016 – Oct 2017</p>
-            </div>
-            <div class="details-content">
-                <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
-                    <li>Worked effectively in a team and maintained high standards.</li>
-                    <li>Prepared products according to company standards.</li>
-                    <li>Provided customer service and maintained a clean work area.</li>
-                </ul>
-            </div>
-        </div>
-        <div class="timeline-item mb-8">
-            <div class="cursor-pointer job-toggle">
-                <h3 class="text-lg font-semibold text-gray-800">English Language Tutor</h3>
-                <p class="text-md text-gray-600">Self-employed</p>
-                <p class="text-sm text-gray-500">Sep 2015 – Present</p>
-            </div>
-            <div class="details-content">
-                <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
-                    <li>Selected teaching materials and assisted with homework.</li>
-                    <li>Used creative teaching methods, including analyzing series and songs.</li>
-                </ul>
-            </div>
-        </div>
-        <div class="timeline-item mb-8">
-            <div class="cursor-pointer job-toggle">
-                <h3 class="text-lg font-semibold text-gray-800">Event Organizer</h3>
-                <p class="text-md text-gray-600">Self-employed</p>
-                <p class="text-sm text-gray-500">Nov 2014 – Present</p>
-            </div>
-            <div class="details-content">
-                <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
-                    <li>Negotiated and concluded contracts with landlords and sponsors.</li>
-                    <li>Developed event scenarios and programs, and found participants.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+        </section>
 
 <section id="portfolio" class="portfolio-section">
     <div class="container">
-        <h2 class="section-title">My Portfolio</h2>
+        <h2 class="section-title">Portfolio</h2>
         <div class="portfolio-grid">
             
             <div class="portfolio-item">
@@ -450,17 +525,17 @@
                 </a>
                 <div class="portfolio-info">
                     <h3>Pride Auto Transport</h3>
-                    <p>Website for a car transportation company.</p>
+                    <p>Website for a company that specializes in car transportation.</p>
                 </div>
             </div>
             
             <div class="portfolio-item">
-                <a href="#" class="portfolio-link" data-fullsize="Compare-The-Carrier-Your-Truster-Logistics-Navigator.png" data-title="Compare The Carrier (Home Page)">
+                <a href="#" class="portfolio-link" data-fullsize="Compare-The-Carrier-Your-Truster-Logistics-Navigator.png" data-title="Compare The Carrier (Homepage)">
                     <img src="Compare-The-Carrier-Your-Truster-Logistics-Navigator.png" alt="Compare The Carrier - Logistics Navigator Website">
                 </a>
                 <div class="portfolio-info">
-                    <h3>Compare The Carrier (Home Page)</h3>
-                    <p>Home page design for a logistics company.</p>
+                    <h3>Compare The Carrier (Homepage)</h3>
+                    <p>Homepage design for a logistics company.</p>
                 </div>
             </div>
 
@@ -470,7 +545,7 @@
                 </a>
                 <div class="portfolio-info">
                     <h3>Compare The Carrier (Blog)</h3>
-                    <p>Blog section with useful articles. Their writing, populating, and publication.</p>
+                    <p>Blog section with useful articles. Writing, content filling, and publication.</p>
                 </div>
             </div>
 
@@ -480,7 +555,7 @@
                 </a>
                 <div class="portfolio-info">
                     <h3>Compare The Carrier (Cases)</h3>
-                    <p>An overview of the company's expertise and successful projects.</p>
+                    <p>Overview of the company's expertise and successful projects.</p>
                 </div>
             </div>
 
@@ -490,7 +565,7 @@
                 </a>
                 <div class="portfolio-info">
                     <h3>Compare The Carrier (YouTube)</h3>
-                    <p>Creating videos for the company's YouTube channel.</p>
+                    <p>Video creation for the company's YouTube channel.</p>
                 </div>
             </div>
 
@@ -500,17 +575,17 @@
                 </a>
                 <div class="portfolio-info">
                     <h3>Drayage Service (GetCarrier)</h3>
-                    <p>Populating the website section dedicated to container transportation services.</p>
+                    <p>Content filling of the website section dedicated to container shipping services.</p>
                 </div>
             </div>
 
             <div class="portfolio-item">
-                <a href="#" class="portfolio-link" data-fullsize="instagram-profiles.png" data-title="Instagram Profile Examples">
+                <a href="#" class="portfolio-link" data-fullsize="instagram-profiles.png" data-title="Examples of Instagram Profiles">
                     <img src="instagram-profiles.png" alt="Instagram Profiles">
                 </a>
                 <div class="portfolio-info">
                     <h3>Instagram Profiles</h3>
-                    <p>Examples of Instagram profile design and content for various clients.</p>
+                    <p>Examples of design and content for Instagram profiles for various clients.</p>
                 </div>
             </div>
 
@@ -547,55 +622,134 @@
                     </div>
                 </div>
                 
-<div class="flex-1">
-    <h2 class="section-title text-2xl font-semibold">Language Proficiency</h2>
-    <div class="space-y-4">
-        <div class="space-y-1">
-            <div class="flex justify-between items-center text-gray-700">
-                <p class="font-medium">Ukrainian</p>
-                <span class="text-sm font-semibold">Fluent</span>
+                <div class="flex-1">
+                    <h2 class="section-title text-2xl font-semibold">Language Proficiency</h2>
+                    <div class="space-y-4">
+                        <div class="space-y-1">
+                            <div class="flex justify-between items-center text-gray-700">
+                                <p class="font-medium">Ukrainian</p>
+                                <span class="text-sm font-semibold">Fluent</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-[#a90534] h-2.5 rounded-full" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between items-center text-gray-700">
+                                <p class="font-medium">English</p>
+                                <span class="text-sm font-semibold">Advanced</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-[#a90534] h-2.5 rounded-full" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between items-center text-gray-700">
+                                <p class="font-medium">German</p>
+                                <span class="text-sm font-semibold">Beginner</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-[#a90534] h-2.5 rounded-full" style="width: 30%;"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between items-center text-gray-700">
+                                <p class="font-medium">Spanish</p>
+                                <span class="text-sm font-semibold">Beginner</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-[#a90534] h-2.5 rounded-full" style="width: 30%;"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between items-center text-gray-700">
+                                <p class="font-medium">Russian</p>
+                                <span class="text-sm font-semibold">Fluent</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                               <div class="bg-gray-400 h-2.5 rounded-full" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div class="bg-[#a90534] h-2.5 rounded-full" style="width: 100%;"></div>
-            </div>
-        </div>
-        <div class="space-y-1">
-            <div class="flex justify-between items-center text-gray-700">
-                <p class="font-medium">English</p>
-                <span class="text-sm font-semibold">Advanced</span>
-            </div>
-            <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div class="bg-[#a90534] h-2.5 rounded-full" style="width: 80%;"></div>
-            </div>
-        </div>
-        <div class="space-y-1">
-            <div class="flex justify-between items-center text-gray-700">
-                <p class="font-medium">German</p>
-                <span class="text-sm font-semibold">Beginner</span>
-            </div>
-            <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div class="bg-[#a90534] h-2.5 rounded-full" style="width: 30%;"></div>
-            </div>
-        </div>
-        <div class="space-y-1">
-            <div class="flex justify-between items-center text-gray-700">
-                <p class="font-medium">Spanish</p>
-                <span class="text-sm font-semibold">Beginner</span>
-            </div>
-            <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div class="bg-[#a90534] h-2.5 rounded-full" style="width: 20%;"></div>
-            </div>
-        </div>
-        <div class="space-y-1">
-            <div class="flex justify-between items-center text-gray-400">
-                <p class="font-medium">Russian</p>
-                <span class="text-sm font-semibold">Fluent</span>
-            </div>
-            <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div class="bg-gray-400 h-2.5 rounded-full" style="width: 100%;"></div>
-            </div>
-        </div>
+        </section>
+
+        <footer class="text-center text-gray-500 text-sm py-8">
+            <p>&copy; 2025 Anastasiia Safronova. All rights reserved.</p>
+        </footer>
     </div>
-</div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const skillFilterButtons = document.querySelectorAll('.skill-filter-btn');
+            const skillTags = document.querySelectorAll('.skill-badge');
+            const jobToggles = document.querySelectorAll('.job-toggle');
 
+            skillFilterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filter = button.dataset.filter;
+
+                    skillFilterButtons.forEach(btn => {
+                        btn.classList.remove('active', 'bg-[#4b066d]', 'text-white');
+                        btn.classList.add('bg-white', 'text-gray-700');
+                    });
+                    button.classList.add('active', 'bg-[#4b066d]', 'text-white');
+                    button.classList.remove('bg-white', 'text-gray-700');
+
+                    skillTags.forEach(tag => {
+                        if (filter === 'all' || tag.dataset.category === filter) {
+                            tag.style.display = 'inline-block';
+                        } else {
+                            tag.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            jobToggles.forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    const content = toggle.nextElementSibling;
+                    content.classList.toggle('open');
+                });
+            });
+        });
+    </script>
+<script>
+    // Getting the modal window
+    var modal = document.getElementById("imageModal");
+
+    // Getting the image and caption in the modal window
+    var modalImg = document.getElementById("modalImage");
+    var captionText = document.getElementById("caption");
+
+    // Getting all image links
+    var links = document.getElementsByClassName("portfolio-link");
+
+    // Looping through all links and adding an event handler
+    for (var i = 0; i < links.length; i++) {
+        links[i].onclick = function(event) {
+            event.preventDefault();
+            modal.style.display = "block";
+            modalImg.src = this.getAttribute("data-fullsize");
+            captionText.innerHTML = this.getAttribute("data-title");
+        }
+    }
+
+    // Getting the close button (x)
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on (x), close the modal window
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Close the modal window if the click is outside the image
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+</body>
+</html>
