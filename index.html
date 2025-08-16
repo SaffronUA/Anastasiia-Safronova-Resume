@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інтерактивне Резюме | Анастасія Сафронова</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+        .container {
+            max-width: 900px;
+        }
+        .section-title {
+            position: relative;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 4px;
+            background-color: #a90534;
+            border-radius: 2px;
+        }
+        .card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .skill-badge {
+            display: inline-block;
+            background-color: #f7e0e5;
+            color: #4b066d;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            margin: 0.25rem;
+            transition: background-color 0.3s ease;
+        }
+        .skill-badge:hover {
+            background-color: #eecdd4;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.75rem;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #f7e0e5;
+            border: 4px solid #a90534;
+        }
+        .details-content {
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .details-content.open {
+            max-height: 1000px;
+            opacity: 1;
+        }
+        .skill-filter-btn {
+            transition: all 0.3s ease;
+        }
+        .skill-filter-btn.active {
+            background-color: #4b066d;
+            color: white;
+        }
+        .tag-cloud-item {
+            background-color: #f7e0e5;
+            padding: 4px 12px;
+            border-radius: 16px;
+            margin: 4px;
+            display: inline-block;
+            font-size: 0.9rem;
+            color: #555;
+            transition: all 0.3s ease;
+        }
+        .tag-cloud-item:hover {
+            background-color: #a90534;
+            color: white;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto space-y-12 py-12 px-4 sm:px-6 lg:px-8">
+
+        <!-- Header Section -->
+        <header class="text-center">
+            <h1 class="text-5xl font-extrabold text-gray-900 leading-tight">Анастасія Сафронова</h1>
+            <p class="text-xl text-gray-600 mt-2">Маркетолог, проєкт-менеджер, ініціативний розробник</p>
+            <div class="mt-6 flex flex-wrap justify-center items-center text-gray-600 space-x-4 md:space-x-8 text-sm md:text-base">
+                <a href="tel:0508217240" class="hover:underline hover:text-[#a90534] transition-colors duration-200">📞 050 821-72-40</a>
+                <a href="mailto:anastasiia.safronova1@gmail.com" class="hover:underline hover:text-[#a90534] transition-colors duration-200">📧 anastasiia.safronova1@gmail.com</a>
+                <span>📍 Дніпро, Україна</span>
+            </div>
+        </header>
+
+        <!-- Professional Summary -->
+        <section class="card">
+            <h2 class="section-title text-2xl font-semibold">Професійний огляд</h2>
+            <p class="text-gray-700 leading-relaxed">
+                Висококваліфікований та мотивований спеціаліст з маркетингу та SEO з 5-річним досвідом у створенні контенту, пошуковій оптимізації та управлінні соціальними мережами. Відповідала за повний цикл контент-маркетингу, від дослідження ключових слів до аналітики та звітності, що сприяло зростанню видимості та залученості аудиторії. Маю сильні навички у проектному менеджменті та міжфункціональній співпраці.
+            </p>
+        </section>
+
+        <!-- Key Skills Section -->
+        <section class="card">
+            <h2 class="section-title text-2xl font-semibold">Ключові навички</h2>
+            <div id="skill-filters" class="flex flex-wrap justify-center gap-2 mb-8">
+                <button data-filter="all" class="skill-filter-btn active bg-[#4b066d] text-white px-4 py-2 rounded-full text-sm font-semibold">Всі</button>
+                <button data-filter="marketing" class="skill-filter-btn bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-100">Маркетинг та SEO</button>
+                <button data-filter="content" class="skill-filter-btn bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-100">Створення контенту</button>
+                <button data-filter="tools" class="skill-filter-btn bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-100">Інструменти</button>
+            </div>
+            <div class="flex flex-wrap items-center">
+                <span class="skill-badge" data-category="marketing">Контент-маркетинг</span>
+                <span class="skill-badge" data-category="marketing">SEO-стратегії</span>
+                <span class="skill-badge" data-category="marketing">Побудова посилань</span>
+                <span class="skill-badge" data-category="marketing">PPC</span>
+                <span class="skill-badge" data-category="marketing">SMM</span>
+                <span class="skill-badge" data-category="marketing">Веб-аналітика</span>
+                <span class="skill-badge" data-category="marketing">Rank Math</span>
+                <span class="skill-badge" data-category="marketing">Аналіз та дослідження ринку</span>
+                <span class="skill-badge" data-category="marketing">Проектний менеджмент</span>
+                
+                <span class="skill-badge" data-category="content">Написання статей та блог-постів</span>
+                <span class="skill-badge" data-category="content">Створення відео-сценаріїв</span>
+                <span class="skill-badge" data-category="content">Створення зображень та відео</span>
+                <span class="skill-badge" data-category="content">Ретушування</span>
+                <span class="skill-badge" data-category="content">Фотографування</span>
+                <span class="skill-badge" data-category="content">Canva</span>
+                <span class="skill-badge" data-category="content">Adobe (Photoshop, Lightroom)</span>
+
+                <span class="skill-badge" data-category="tools">Google Analytics</span>
+                <span class="skill-badge" data-category="tools">Google Search Console</span>
+                <span class="skill-badge" data-category="tools">Meta Business Suite</span>
+                <span class="skill-badge" data-category="tools">WordPress</span>
+                <span class="skill-badge" data-category="tools">OkayCMS</span>
+                <span class="skill-badge" data-category="tools">OpenCart</span>
+                <span class="skill-badge" data-category="tools">Ahrefs</span>
+                <span class="skill-badge" data-category="tools">SEMrush</span>
+                <span class="skill-badge" data-category="tools">Trello</span>
+                <span class="skill-badge" data-category="tools">Asana</span>
+                <span class="skill-badge" data-category="tools">Google Docs / Sheets</span>
+            </div>
+        </section>
+
+        <!-- Work Experience Section -->
+        <section class="card">
+            <h2 class="section-title text-2xl font-semibold">Досвід роботи</h2>
+            <div class="relative pl-10 border-l-2 border-dashed border-gray-300">
+                <!-- Job Item 1 (Freelance) -->
+                <div class="timeline-item mb-8">
+                    <div class="cursor-pointer job-toggle">
+                        <h3 class="text-lg font-semibold text-gray-800">Фрілансер</h3>
+                        <p class="text-md text-gray-600">Самозайнята діяльність</p>
+                        <p class="text-sm text-gray-500">з травня 2025 по нині</p>
+                    </div>
+                    <div class="details-content">
+                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                            <li>Самостійне управління проектами, тайм-менеджмент та комунікація з клієнтами.</li>
+                            <li>Використання навичок SEO та контент-маркетингу для різних проектів.</li>
+                            <li>Реалізація комплексних стратегій для підвищення онлайн-присутності.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Job Item 2 (Compare The Carrier) -->
+                <div class="timeline-item mb-8">
+                    <div class="cursor-pointer job-toggle">
+                        <h3 class="text-lg font-semibold text-gray-800">Спеціаліст з контенту та SEO</h3>
+                        <p class="text-md text-gray-600">Compare The Carrier</p>
+                        <p class="text-sm text-gray-500">з 12.2021 по 05.2025</p>
+                    </div>
+                    <div class="details-content">
+                        <p class="text-gray-700 leading-relaxed">
+                            На посаді спеціаліста з контенту та SEO моя роль включала широкий спектр завдань для покращення цифрової присутності та підвищення ефективності органічного пошуку. Я відповідала за створення, оптимізацію та управління контентом на різних платформах, включаючи статті, дописи в блогах та веб-сторінки. Моя робота сприяла збільшенню видимості, покращенню позицій за ключовими словами та підвищенню залученості користувачів для ключових проектів у галузях транспорту та логістики.
+                        </p>
+                        <h4 class="text-lg font-semibold text-gray-800 mt-4">Ключові обов'язки та досягнення:</h4>
+                        
+                        <h5 class="text-md font-semibold text-gray-700 mt-2">Створення та управління контентом:</h5>
+                        <ul class="mt-2 list-disc list-inside text-gray-600 space-y-1">
+                            <li>Створення контенту для різних цифрових платформ, включаючи: сценарії та концепції для відео, короткі відео для соціальних мереж, текст для нових сторінок та B2B-комунікацій, а також контент для соціальних мереж.</li>
+                            <li>Керування процесом публікації та оптимізації, включаючи додавання фото та відео та оновлення існуючих статей.</li>
+                        </ul>
+                        
+                        <h5 class="text-md font-semibold text-gray-700 mt-2">Пошукова оптимізація (SEO):</h5>
+                        <ul class="mt-2 list-disc list-inside text-gray-600 space-y-1">
+                            <li>Реалізація комплексних SEO-стратегій, включаючи дослідження ключових слів та аналіз конкурентів.</li>
+                            <li>Керування кампаніями з побудови посилань та проведення технічних SEO-аудитів.</li>
+                            <li>Моніторинг та звітність за ключовими показниками ефективності (SEO та SMM звіти).</li>
+                            <li>Відстеження поточних тенденцій у SEO.</li>
+                            <li>Розробка інфографіки та візуальних матеріалів для контенту.</li>
+                            <li>Управління on-page SEO.</li>
+                        </ul>
+                        
+                        <h5 class="text-md font-semibold text-gray-700 mt-2">Координація проектів та завдань:</h5>
+                        <ul class="mt-2 list-disc list-inside text-gray-600 space-y-1">
+                            <li>Організація та управління щотижневими завданнями в Asana.</li>
+                            <li>Надання регулярних звітів про хід роботи.</li>
+                            <li>Співпраця з членами команди.</li>
+                            <li>Підготовка та проведення презентацій щодо SEO-стратегій.</li>
+                            <li>Управління та організація контент-матеріалів.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Job Item 3 (DTI) -->
+                <div class="timeline-item mb-8">
+                    <div class="cursor-pointer job-toggle">
+                        <h3 class="text-lg font-semibold text-gray-800">Трейд-маркетолог</h3>
+                        <p class="text-md text-gray-600">DTI, Дніпро</p>
+                        <p class="text-sm text-gray-500">з 06.2020 по 04.2021</p>
+                    </div>
+                    <div class="details-content">
+                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                            <li>Контроль наявності маркетингових товарів, замовлення їх та пошук постачальників, введення та розробка реєстрів.</li>
+                            <li>Оцінка відеоматеріалів та ведення YouTube-каналів.</li>
+                            <li>Наповнення інформацією сайтів на платформах OkayCMS і OpenCart.</li>
+                            <li>Прийняття брифів щодо брендування, подача задач дизайнеру та поліграфії.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Job Item 4 (Selfcentr) -->
+                <div class="timeline-item mb-8">
+                    <div class="cursor-pointer job-toggle">
+                        <h3 class="text-lg font-semibold text-gray-800">Адміністратор</h3>
+                        <p class="text-md text-gray-600">Йога-центр "Selfcentr", Дніпро</p>
+                        <p class="text-sm text-gray-500">з 12.2019 по 04.2020</p>
+                    </div>
+                    <div class="details-content">
+                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                            <li>Ведення статистики відвідуваності та управління продажем абонементів.</li>
+                            <li>Складання розкладу та ведення фінансової звітності.</li>
+                            <li>Забезпечення чистоти приміщень та замовлення господарських товарів.</li>
+                        </ul>
+                    </div>
+                </div>
+                 <!-- Job Item 5 (Monobank) -->
+                <div class="timeline-item mb-8">
+                    <div class="cursor-pointer job-toggle">
+                        <h3 class="text-lg font-semibold text-gray-800">Спеціаліст напрямку "Сервіс"</h3>
+                        <p class="text-md text-gray-600">АТ "Універсал Банк", проєкт "Монобанк"</p>
+                        <p class="text-sm text-gray-500">з 06.2019 по 08.2019</p>
+                    </div>
+                    <div class="details-content">
+                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                            <li>Обслуговування клієнтів у телефонному режимі та в чаті, надання необхідної інформації.</li>
+                            <li>Ефективне вирішення проблем клієнтів.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Job Item 6 (Barista) -->
+                <div class="timeline-item mb-8">
+                    <div class="cursor-pointer job-toggle">
+                        <h3 class="text-lg font-semibold text-gray-800">Бариста</h3>
+                        <p class="text-md text-gray-600">«LoveKava», Дніпро</p>
+                        <p class="text-sm text-gray-500">з 02.2019 по 06.2019</p>
+                    </div>
+                    <div class="details-content">
+                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                            <li>Приготування кави та супутніх товарів.</li>
+                            <li>Управління фінансовою звітністю.</li>
+                            <li>Креативні пропозиції для кав'ярні.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Job Item 7 (Translator) -->
+                <div class="timeline-item mb-8">
+                    <div class="cursor-pointer job-toggle">
+                        <h3 class="text-lg font-semibold text-gray-800">Перекладач</h3>
+                        <p class="text-md text-gray-600">Самозайнятість</p>
+                        <p class="text-sm text-gray-500">з 01.2017 по нині</p>
+                    </div>
+                    <div class="details-content">
+                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                            <li>Переклад текстів різної тематики, включаючи навчальні матеріали та описи товарів.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Job Item 8 (McDonald's) -->
+                <div class="timeline-item mb-8">
+                    <div class="cursor-pointer job-toggle">
+                        <h3 class="text-lg font-semibold text-gray-800">Член бригади ресторану</h3>
+                        <p class="text-md text-gray-600">МакДональдз, Дніпро</p>
+                        <p class="text-sm text-gray-500">з 03.2016 по 10.2017</p>
+                    </div>
+                    <div class="details-content">
+                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                            <li>Ефективна робота в команді та дотримання високих стандартів.</li>
+                            <li>Приготування продукції згідно з внутрішніми стандартами компанії.</li>
+                            <li>Обслуговування клієнтів та підтримка чистоти робочої зони.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Job Item 9 (Tutor) -->
+                <div class="timeline-item mb-8">
+                    <div class="cursor-pointer job-toggle">
+                        <h3 class="text-lg font-semibold text-gray-800">Репетитор англійської мови</h3>
+                        <p class="text-md text-gray-600">Самозайнятість</p>
+                        <p class="text-sm text-gray-500">з 09.2015 по нині</p>
+                    </div>
+                    <div class="details-content">
+                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                            <li>Підбір навчальних матеріалів, допомога з домашніми завданнями.</li>
+                            <li>Використання креативних методів навчання, включаючи розбір серіалів та пісень.</li>
+                        </ul>
+                    </div>
+                </div>
+                 <!-- Job Item 10 (Event Organizer) -->
+                <div class="timeline-item mb-8">
+                    <div class="cursor-pointer job-toggle">
+                        <h3 class="text-lg font-semibold text-gray-800">Організатор заходів</h3>
+                        <p class="text-md text-gray-600">Самозайнятість</p>
+                        <p class="text-sm text-gray-500">з 11.2014 по 07.2017</p>
+                    </div>
+                    <div class="details-content">
+                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                            <li>Проведення переговорів та укладання договорів з орендодавцями та спонсорами.</li>
+                            <li>Розробка сценаріїв та програм заходів, пошук учасників.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education & Languages Section (Combined) -->
+        <section class="card">
+            <div class="flex flex-col md:flex-row md:space-x-8 space-y-8 md:space-y-0">
+                <!-- Education & Courses -->
+                <div class="flex-1">
+                    <h2 class="section-title text-2xl font-semibold">Освіта та сертифікації</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-medium text-[#4b066d]">Дніпровський національний університет ім. Олеся Гончара</h3>
+                            <p class="text-sm text-gray-500">Економічний факультет (2015 – 2019)</p>
+                        </div>
+                        <h3 class="text-xl font-medium text-gray-800">Додаткова освіта та курси</h3>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1">
+                            <li>Social Media, Hubspot Academy (2022)</li>
+                            <li>The Fundamentals of Digital Marketing, Google Digital Garage (2022)</li>
+                            <li>Google Analytics for Beginners, Google Analytics Academy (2022)</li>
+                            <li>Content Marketing, Hubspot Academy (2022)</li>
+                            <li>Facebook Marketing and Advertising, SkillUp (2022)</li>
+                            <li>Summer English Institute (2014, 2015, 2016)</li>
+                            <li>Oxford Language Centre (2013)</li>
+                            <li>Brighton Language College (2018)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Languages -->
+                <div class="flex-1">
+                    <h2 class="section-title text-2xl font-semibold">Знання мов</h2>
+                    <div class="space-y-4">
+                        <!-- Language Item: Ukrainian -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between items-center text-gray-700">
+                                <p class="font-medium">Українська</p>
+                                <span class="text-sm font-semibold">Вільно</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-[#a90534] h-2.5 rounded-full" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                        <!-- Language Item: English -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between items-center text-gray-700">
+                                <p class="font-medium">Англійська</p>
+                                <span class="text-sm font-semibold">Просунутий</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-[#a90534] h-2.5 rounded-full" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        <!-- Language Item: German -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between items-center text-gray-700">
+                                <p class="font-medium">Німецька</p>
+                                <span class="text-sm font-semibold">Початковий</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-[#a90534] h-2.5 rounded-full" style="width: 30%;"></div>
+                            </div>
+                        </div>
+                        <!-- Language Item: Spanish -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between items-center text-gray-700">
+                                <p class="font-medium">Іспанська</p>
+                                <span class="text-sm font-semibold">Початковий</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-[#a90534] h-2.5 rounded-full" style="width: 30%;"></div>
+                            </div>
+                        </div>
+                        <!-- Language Item: Russian -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between items-center text-gray-700">
+                                <p class="font-medium">Російська</p>
+                                <span class="text-sm font-semibold">Вільно</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-[#a90534] h-2.5 rounded-full" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-500 text-sm py-8">
+            <p>&copy; 2025 Анастасія Сафронова. Усі права захищені.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const skillFilterButtons = document.querySelectorAll('.skill-filter-btn');
+            const skillTags = document.querySelectorAll('.skill-badge');
+            const jobToggles = document.querySelectorAll('.job-toggle');
+
+            skillFilterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filter = button.dataset.filter;
+
+                    skillFilterButtons.forEach(btn => {
+                        btn.classList.remove('active', 'bg-[#4b066d]', 'text-white');
+                        btn.classList.add('bg-white', 'text-gray-700');
+                    });
+                    button.classList.add('active', 'bg-[#4b066d]', 'text-white');
+                    button.classList.remove('bg-white', 'text-gray-700');
+
+                    skillTags.forEach(tag => {
+                        if (filter === 'all' || tag.dataset.category === filter) {
+                            tag.style.display = 'inline-block';
+                        } else {
+                            tag.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            jobToggles.forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    const content = toggle.nextElementSibling;
+                    content.classList.toggle('open');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
