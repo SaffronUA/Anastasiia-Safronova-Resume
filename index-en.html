@@ -761,6 +761,10 @@ transition: transform 0.5s ease-in-out;
                 toggle.addEventListener('click', () => {
                     const content = toggle.nextElementSibling;
                     content.classList.toggle('open');
+                    const arrowIcon = toggle.querySelector('svg');
+                    if (arrowIcon) {
+                        arrowIcon.classList.toggle('rotate-180');
+                    }
                 });
             });
         });
@@ -803,4 +807,5 @@ transition: transform 0.5s ease-in-out;
 </script>
 </body>
 </html>
+
 
