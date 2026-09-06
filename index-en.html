@@ -1,872 +1,894 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Resume | Anastasiia Safronova</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-    body {
-        font-family: 'Inter', sans-serif;
-        background-color: #f3f4f6;
-        color: #374151;
-    }
-    .container {
-        max-width: 900px;
-    }
-    .section-title {
-        position: relative;
-        padding-bottom: 0.5rem;
-        margin-bottom: 1.5rem;
-    }
-    .section-title::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 50px;
-        height: 4px;
-        background-color: #a90534;
-        border-radius: 2px;
-    }
-    .card {
-        background-color: white;
-        padding: 2rem;
-        border-radius: 1.5rem;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    }
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    }
-    .skill-badge {
-        display: inline-block;
-        background-color: #f7e0e5;
-        color: #4b066d;
-        padding: 0.5rem 1rem;
-        border-radius: 9999px;
-        font-weight: 500;
-        margin: 0.25rem;
-        transition: background-color 0.3s ease;
-    }
-    .skill-badge:hover {
-        background-color: #eecdd4;
-    }
-    .timeline-item::before {
-        content: '';
-        position: absolute;
-        left: -2.75rem;
-        top: 0;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background-color: #f7e0e5;
-        border: 4px solid #a90534;
-    }
-    .details-content {
-        transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
-        max-height: 0;
-        opacity: 0;
-        overflow: hidden;
-    }
-    .details-content.open {
-        max-height: 1000px;
-        opacity: 1;
-    }
-    .skill-filter-btn {
-        transition: all 0.3s ease;
-    }
-    .skill-filter-btn.active {
-        background-color: #4b066d;
-        color: white;
-    }
-    .tag-cloud-item {
-        background-color: #f7e0e5;
-        padding: 4px 12px;
-        border-radius: 16px;
-        margin: 4px;
-        display: inline-block;
-        font-size: 0.9rem;
-        color: #555;
-        transition: all 0.3s ease;
-    }
-    .tag-cloud-item:hover {
-        background-color: #a90534;
-        color: white;
-    }
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Interactive Resume | Anastasiia Safronova</title>
+        <script src="https://cdn.tailwindcss.com">
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <style>
+            body {
+                font-family: 'Inter', sans-serif;
+                background-color: #f3f4f6;
+                color: #374151;
+            }
+            .container {
+                max-width: 900px;
+            }
+            .section-title {
+                position: relative;
+                padding-bottom: 0.5rem;
+                margin-bottom: 1.5rem;
+            }
+            .section-title::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 50px;
+                height: 4px;
+                background-color: #a90534;
+                border-radius: 2px;
+            }
+            .card {
+                background-color: white;
+                padding: 2rem;
+                border-radius: 1.5rem;
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+                transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            }
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            .skill-badge {
+                display: inline-block;
+                background-color: #f7e0e5;
+                color: #4b066d;
+                padding: 0.5rem 1rem;
+                border-radius: 9999px;
+                font-weight: 500;
+                margin: 0.25rem;
+                transition: background-color 0.3s ease;
+            }
+            .skill-badge:hover {
+                background-color: #eecdd4;
+            }
+            .timeline-item::before {
+                content: '';
+                position: absolute;
+                left: -2.75rem;
+                top: 0;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background-color: #f7e0e5;
+                border: 4px solid #a90534;
+            }
+            .details-content {
+                transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+                max-height: 0;
+                opacity: 0;
+                overflow: hidden;
+            }
+            .details-content.open {
+                max-height: 1000px;
+                opacity: 1;
+            }
+            .skill-filter-btn {
+                transition: all 0.3s ease;
+            }
+            .skill-filter-btn.active {
+                background-color: #4b066d;
+                color: white;
+            }
+            .tag-cloud-item {
+                background-color: #f7e0e5;
+                padding: 4px 12px;
+                border-radius: 16px;
+                margin: 4px;
+                display: inline-block;
+                font-size: 0.9rem;
+                color: #555;
+                transition: all 0.3s ease;
+            }
+            .tag-cloud-item:hover {
+                background-color: #a90534;
+                color: white;
+            }
 
-    /* Styles for Portfolio, which you need */
-    .portfolio-section {
-        padding: 60px 0;
-        background-color: #f4f7f6;
-        text-align: center;
-    }
-    .portfolio-section .section-title {
-        margin-bottom: 40px;
-    }
-    .portfolio-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
-        padding: 0 20px;
-    }
-    .portfolio-item {
-        position: relative;
-        overflow: hidden;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    }
-    .portfolio-item:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
-    .portfolio-item img {
-        width: 100%;
-        height: auto;
-        display: block;
-        transition: transform 0.5s ease-in-out;
-    }
-    .portfolio-info {
-        padding: 15px;
-        text-align: center;
-        background-color: #fff;
-    }
-    .portfolio-info h3 {
-        margin: 0 0 5px 0;
-        font-size: 1.2em;
-    }
-    .portfolio-info p {
-        margin: 0;
-        font-size: 0.9em;
-        color: #555;
-    }
-    /* Modal styles (for popup window) */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.9);
-        padding-top: 60px;
-    }
-    .modal-content {
-        margin: auto;
-        display: block;
-        width: 80%;
-        max-width: 1200px;
-        border-radius: 8px;
-    }
-    #caption {
-        margin: auto;
-        display: block;
-        width: 80%;
-        max-width: 1200px;
-        text-align: center;
-        color: #ccc;
-        padding: 10px 0;
-        height: 150px;
-    }
-    .close {
-        position: absolute;
-        top: 15px;
-        right: 35px;
-        color: #f1f1f1;
-        font-size: 40px;
-        font-weight: bold;
-        transition: 0.3s;
-    }
-    .close:hover,
-    .close:focus {
-        color: #bbb;
-        text-decoration: none;
-        cursor: pointer;
-    }
- .portfolio-section {
-        padding: 60px 0;
-        background-color: #f4f7f6;
-        text-align: center;
-    }
-    .portfolio-section .section-title {
-        margin-bottom: 40px;
-    }
-    .portfolio-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
-        padding: 0 20px;
-    }
-    .portfolio-item {
-        position: relative;
-        overflow: hidden;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    }
-    .portfolio-item:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
-.portfolio-item img {
-    width: 100%;
-    height: 150px;
-object-fit: cover;
-object-position: center;
-display: block;
-transition: transform 0.5s ease-in-out;
-}
-    .portfolio-info {
-        padding: 15px;
-        text-align: center;
-        background-color: #fff;
-    }
-    .portfolio-info h3 {
-        margin: 0 0 5px 0;
-        font-size: 1.2em;
-    }
-    .portfolio-info p {
-        margin: 0;
-        font-size: 0.9em;
-        color: #555;
-    }
-    /* Styles for modal window */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.9);
-        padding-top: 60px;
-    }
-    .modal-content {
-        margin: auto;
-        display: block;
-        width: 80%;
-        max-width: 1200px;
-        border-radius: 8px;
-    }
-    #caption {
-        margin: auto;
-        display: block;
-        width: 80%;
-        max-width: 1200px;
-        text-align: center;
-        color: #ccc;
-        padding: 10px 0;
-        height: 150px;
-    }
-    .close {
-        position: absolute;
-        top: 15px;
-        right: 35px;
-        color: #f1f1f1;
-        font-size: 40px;
-        font-weight: bold;
-        transition: 0.3s;
-    }
-    .close:hover,
-    .close:focus {
-        color: #bbb;
-        text-decoration: none;
-        cursor: pointer;
-    }
-</style>
-    
-</head>
-<body class="antialiased">
-    <div class="container mx-auto space-y-12 py-12 px-4 sm:px-6 lg:px-8">
+            .portfolio-section {
+                padding: 60px 0;
+                background-color: #f4f7f6;
+                text-align: center;
+            }
+            .portfolio-section .section-title {
+                margin-bottom: 40px;
+            }
+            .portfolio-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 30px;
+                padding: 0 20px;
+            }
+            .portfolio-item {
+                position: relative;
+                overflow: hidden;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            }
+            .portfolio-item:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+            .portfolio-item img {
+                width: 100%;
+                height: 150px;
+                object-fit: cover;
+                object-position: center;
+                display: block;
+                transition: transform 0.5s ease-in-out;
+            }
+            .portfolio-info {
+                padding: 15px;
+                text-align: center;
+                background-color: #fff;
+            }
+            .portfolio-info h3 {
+                margin: 0 0 5px 0;
+                font-size: 1.2em;
+            }
+            .portfolio-info p {
+                margin: 0;
+                font-size: 0.9em;
+                color: #555;
+            }
+            .portfolio-info .metrics {
+                font-size: 0.85em;
+                color: #a90534;
+                font-weight: 600;
+                margin-top: 6px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px 14px;
+            }
+            .portfolio-info .metrics span {
+                background: #f7e0e5;
+                padding: 2px 10px;
+                border-radius: 12px;
+            }
 
-        <header class="text-center">
-            <h1 class="text-5xl font-extrabold text-gray-900 leading-tight">Anastasiia Safronova</h1>
-            <p class="text-xl text-gray-600 mt-2">Marketer, Project Manager, Proactive Developer</p>
-            <div class="mt-6 flex flex-wrap justify-center items-center text-gray-600 space-x-4 md:space-x-8 text-sm md:text-base">
-                <a href="tel:0508217240" class="hover:underline hover:text-[#a90534] transition-colors duration-200">📞 050 821-72-40</a>
-                <a href="mailto:anastasiia.safronova1@gmail.com" class="hover:underline hover:text-[#a90534] transition-colors duration-200">📧 anastasiia.safronova1@gmail.com</a>
-                <span>📍 Dnipro, Ukraine</span>
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1000;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0, 0, 0, 0.9);
+                padding-top: 60px;
+            }
+            .modal-content {
+                margin: auto;
+                display: block;
+                width: 80%;
+                max-width: 1200px;
+                border-radius: 8px;
+            }
+            #caption {
+                margin: auto;
+                display: block;
+                width: 80%;
+                max-width: 1200px;
+                text-align: center;
+                color: #ccc;
+                padding: 10px 0;
+                height: 150px;
+            }
+            .close {
+                position: absolute;
+                top: 15px;
+                right: 35px;
+                color: #f1f1f1;
+                font-size: 40px;
+                font-weight: bold;
+                transition: 0.3s;
+            }
+            .close:hover,
+            .close:focus {
+                color: #bbb;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            .case-study-detail {
+                max-width: 800px;
+                margin: 0 auto;
+                text-align: left;
+                color: #ddd;
+                padding: 20px 0;
+                line-height: 1.7;
+            }
+            .case-study-detail h4 {
+                color: #fff;
+                font-size: 1.3em;
+                margin: 16px 0 8px;
+            }
+            .case-study-detail ul {
+                padding-left: 24px;
+                margin: 8px 0 12px;
+            }
+            .case-study-detail ul li {
+                margin-bottom: 4px;
+            }
+            .case-study-detail .highlight-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                gap: 12px;
+                margin: 16px 0;
+            }
+            .case-study-detail .highlight-grid .stat {
+                background: rgba(255, 255, 255, 0.08);
+                border-radius: 10px;
+                padding: 14px 10px;
+                text-align: center;
+            }
+            .case-study-detail .highlight-grid .stat .number {
+                font-size: 1.8em;
+                font-weight: 700;
+                color: #ff6b8a;
+            }
+            .case-study-detail .highlight-grid .stat .label {
+                font-size: 0.85em;
+                color: #aaa;
+                margin-top: 2px;
+            }
+            .case-study-detail .highlight-grid .stat .change {
+                font-size: 0.9em;
+                color: #6fcf97;
+                font-weight: 600;
+            }
+        </style>
+    </head>
+    <body class="antialiased">
+        <div class="container mx-auto space-y-12 py-12 px-4 sm:px-6 lg:px-8">
+
+            <header class="text-center">
+                <h1 class="text-5xl font-extrabold text-gray-900 leading-tight">Anastasiia Safronova</h1>
+                <p class="text-xl text-gray-600 mt-2">Marketer, Project Manager, Proactive Developer</p>
+                <div class="mt-6 flex flex-wrap justify-center items-center text-gray-600 space-x-4 md:space-x-8 text-sm md:text-base">
+                    <a href="tel:0508217240" class="hover:underline hover:text-[#a90534] transition-colors duration-200">📞 050 821-72-40</a>
+                    <a href="mailto:anastasiia.safronova1@gmail.com" class="hover:underline hover:text-[#a90534] transition-colors duration-200">📧 anastasiia.safronova1@gmail.com</a>
+                    <span>📍 Dnipro, Ukraine</span>
+                </div>
+            </header>
+
+            <nav class="lang-switcher absolute top-4 right-4 text-sm font-semibold">
+                <a href="index.html" class="hover:text-[#a90534]">Укр</a>
+                <span class="text-gray-400">|</span>
+                <a href="index-en.html" class="active text-[#a90534]">Eng</a>
+            </nav>
+
+            <section class="card">
+                <h2 class="section-title text-2xl font-semibold">Professional Summary</h2>
+                <p class="text-gray-700 leading-relaxed">
+                    A highly skilled and motivated marketing and SEO specialist with 5 years of experience in content creation, search engine optimization, and social media management. I was responsible for the complete content marketing cycle, from keyword research to analytics and reporting, which contributed to increased visibility and audience engagement. I have strong skills in project management and cross-functional collaboration.
+                </p>
+            </section>
+
+            <section class="card">
+                <h2 class="section-title text-2xl font-semibold">Key Skills</h2>
+                <div id="skill-filters" class="flex flex-wrap justify-center gap-2 mb-8">
+                    <button data-filter="all" class="skill-filter-btn active bg-[#4b066d] text-white px-4 py-2 rounded-full text-sm font-semibold">All</button>
+                    <button data-filter="marketing" class="skill-filter-btn bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-100">Marketing & SEO</button>
+                    <button data-filter="content" class="skill-filter-btn bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-100">Content Creation</button>
+                    <button data-filter="tools" class="skill-filter-btn bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-100">Tools</button>
+                </div>
+                <div class="flex flex-wrap items-center">
+                    <span class="skill-badge" data-category="marketing">Content Marketing</span>
+                    <span class="skill-badge" data-category="marketing">SEO Strategies</span>
+                    <span class="skill-badge" data-category="marketing">Link Building</span>
+                    <span class="skill-badge" data-category="marketing">PPC</span>
+                    <span class="skill-badge" data-category="marketing">SMM</span>
+                    <span class="skill-badge" data-category="marketing">Web Analytics</span>
+                    <span class="skill-badge" data-category="marketing">Rank Math</span>
+                    <span class="skill-badge" data-category="marketing">Market Analysis & Research</span>
+                    <span class="skill-badge" data-category="marketing">Project Management</span>
+
+                    <span class="skill-badge" data-category="content">Article & Blog Post Writing</span>
+                    <span class="skill-badge" data-category="content">Video Scripting</span>
+                    <span class="skill-badge" data-category="content">Image & Video Creation</span>
+                    <span class="skill-badge" data-category="content">Retouching</span>
+                    <span class="skill-badge" data-category="content">Photography</span>
+                    <span class="skill-badge" data-category="content">Canva</span>
+                    <span class="skill-badge" data-category="content">Adobe (Photoshop, Lightroom)</span>
+
+                    <span class="skill-badge" data-category="tools">Google Analytics</span>
+                    <span class="skill-badge" data-category="tools">Google Search Console</span>
+                    <span class="skill-badge" data-category="tools">Meta Business Suite</span>
+                    <span class="skill-badge" data-category="tools">WordPress</span>
+                    <span class="skill-badge" data-category="tools">OkayCMS</span>
+                    <span class="skill-badge" data-category="tools">OpenCart</span>
+                    <span class="skill-badge" data-category="tools">Ahrefs</span>
+                    <span class="skill-badge" data-category="tools">Asana</span>
+                    <span class="skill-badge" data-category="tools">Google Docs / Sheets</span>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2 class="section-title text-2xl font-semibold">Work Experience</h2>
+                <div class="relative pl-10 border-l-2 border-dashed border-gray-300">
+                    <div class="timeline-item mb-8">
+                        <div class="cursor-pointer job-toggle flex justify-between items-center">
+                            <div class="flex-grow">
+                                <h3 class="text-lg font-semibold text-gray-800">Freelancer</h3>
+                                <p class="text-md text-gray-600">Self-employed</p>
+                                <p class="text-sm text-gray-500">May 2025 – Present</p>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="details-content">
+                            <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                                <li>Independently managed projects, time, and client communication.</li>
+                                <li>Utilized SEO and content marketing skills for various projects.</li>
+                                <li>Implemented comprehensive strategies to increase online presence.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item mb-8">
+                        <div class="cursor-pointer job-toggle flex justify-between items-center">
+                            <div class="flex-grow">
+                                <h3 class="text-lg font-semibold text-gray-800">Content & SEO Specialist</h3>
+                                <p class="text-md text-gray-600">Divebooker.com (Remote)</p>
+                                <p class="text-sm text-gray-500">Dec 2025 – Jul 2026</p>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="details-content">
+                            <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                                <li>Managed content strategy and SEO optimization for Divebooker.com, a liveaboard diving booking platform, including boat/trip page content and blog articles.</li>
+                                <li>Analyzed Google Search Console and organic traffic data to identify content gaps and prioritize high-impact optimization opportunities across boat and destination pages.</li>
+                                <li>Developed data-driven content briefs and case studies for liveaboard trip pages (e.g., Black Manta, Royal Evolution, Ambai) to support conversion-focused content updates.</li>
+                                <li>Recommended and scoped portfolio-level improvements (PDF trip calendars, boat page pop-ups) informed by performance data analysis.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item mb-8">
+                        <div class="cursor-pointer job-toggle flex justify-between items-center">
+                            <div class="flex-grow">
+                                <h3 class="text-lg font-semibold text-gray-800">SEO Manager</h3>
+                                <p class="text-md text-gray-600">Locomotive Media Group (Agency, Remote)</p>
+                                <p class="text-sm text-gray-500">Nov 2025 – Feb 2026</p>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="details-content">
+                            <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                                <li>Conducted full technical SEO audits (hreflang/lang configuration, metadata, URL structure, robots.txt, backlink profile) for agency clients, including elma-consulting.ua, delivering prioritized recommendations.</li>
+                                <li>Built semantic cores and site-structure maps for multiple clients (legal/accounting services, international fintech consulting) using Serpstat, and redesigned information architecture (product tree, site menu) for a legal/accounting client.</li>
+                                <li>Performed competitor keyword and backlink analysis (Ahrefs, Serpstat) for a fintech consulting client, benchmarking against key industry competitors.</li>
+                                <li>Audited backlink profiles (2,500+ referring pages) via Ahrefs to identify link-building opportunities and flag low-quality links.</li>
+                                <li>Deepened hands-on expertise in SE Ranking, Ahrefs, Google Search Console/Analytics, and AI Overview optimization strategy through structured agency training.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item mb-8">
+                        <div class="cursor-pointer job-toggle flex justify-between items-center">
+                            <div class="flex-grow">
+                                <h3 class="text-lg font-semibold text-gray-800">Content and SEO Specialist</h3>
+                                <p class="text-md text-gray-600">Compare The Carrier</p>
+                                <p class="text-sm text-gray-500">Dec 2021 – May 2025</p>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="details-content">
+                            <p class="text-gray-700 leading-relaxed">
+                                As a Content and SEO Specialist, my role encompassed a wide range of tasks aimed at improving digital presence and organic search performance. I was responsible for creating, optimizing, and managing content across various platforms, including articles, blog posts, and web pages. My work contributed to increased visibility, improved keyword rankings, and enhanced user engagement for key projects in the transportation and logistics sectors.
+                            </p>
+                            <h4 class="text-lg font-semibold text-gray-800 mt-4">Key Responsibilities and Achievements:</h4>
+
+                            <h5 class="text-md font-semibold text-gray-700 mt-2">Content Creation & Management:</h5>
+                            <ul class="mt-2 list-disc list-inside text-gray-600 space-y-1">
+                                <li>Created content for various digital platforms, including video scripts and concepts, short social media videos, text for new pages and B2B communications, and social media content.</li>
+                                <li>Managed the publication and optimization process, including adding photos, videos, and updating existing articles.</li>
+                            </ul>
+
+                            <h5 class="text-md font-semibold text-gray-700 mt-2">Search Engine Optimization (SEO):</h5>
+                            <ul class="mt-2 list-disc list-inside text-gray-600 space-y-1">
+                                <li>Implemented comprehensive SEO strategies, including keyword research and competitor analysis.</li>
+                                <li>Managed link-building campaigns and conducted technical SEO audits.</li>
+                                <li>Monitored and reported on key performance indicators (SEO and SMM reports).</li>
+                                <li>Tracked current trends in SEO.</li>
+                                <li>Developed infographics and visual materials for content.</li>
+                                <li>Managed on-page SEO.</li>
+                            </ul>
+
+                            <h5 class="text-md font-semibold text-gray-700 mt-2">Project & Task Coordination:</h5>
+                            <ul class="mt-2 list-disc list-inside text-gray-600 space-y-1">
+                                <li>Organized and managed weekly tasks in Asana.</li>
+                                <li>Provided regular reports on work progress.</li>
+                                <li>Collaborated with team members.</li>
+                                <li>Prepared and delivered presentations on SEO strategies.</li>
+                                <li>Managed and organized content materials.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item mb-8">
+                        <div class="cursor-pointer job-toggle flex justify-between items-center">
+                            <div class="flex-grow">
+                                <h3 class="text-lg font-semibold text-gray-800">Trade Marketer</h3>
+                                <p class="text-md text-gray-600">DTI, Dnipro</p>
+                                <p class="text-sm text-gray-500">Jun 2020 – Apr 2021</p>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="details-content">
+                            <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                                <li>Controlled the availability of marketing products, ordered them, found suppliers, and developed and maintained registries.</li>
+                                <li>Evaluated video materials and managed YouTube channels.</li>
+                                <li>Filled websites with information on OkayCMS and OpenCart platforms.</li>
+                                <li>Accepted branding briefs and delegated tasks to designers and printing services.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item mb-8">
+                        <div class="cursor-pointer job-toggle flex justify-between items-center">
+                            <div class="flex-grow">
+                                <h3 class="text-lg font-semibold text-gray-800">Administrator</h3>
+                                <p class="text-md text-gray-600">Yoga Center "Selfcentr", Dnipro</p>
+                                <p class="text-sm text-gray-500">Dec 2019 – Apr 2020</p>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="details-content">
+                            <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                                <li>Managed attendance statistics and sales of memberships.</li>
+                                <li>Created schedules and handled financial reporting.</li>
+                                <li>Ensured premises cleanliness and ordered household goods.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item mb-8">
+                        <div class="cursor-pointer job-toggle flex justify-between items-center">
+                            <div class="flex-grow">
+                                <h3 class="text-lg font-semibold text-gray-800">Service Specialist</h3>
+                                <p class="text-md text-gray-600">JSC "Universal Bank", Monobank Project</p>
+                                <p class="text-sm text-gray-500">Jun 2019 – Aug 2019</p>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="details-content">
+                            <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                                <li>Provided customer service via phone and chat, offering necessary information.</li>
+                                <li>Effectively resolved customer issues.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item mb-8">
+                        <div class="cursor-pointer job-toggle flex justify-between items-center">
+                            <div class="flex-grow">
+                                <h3 class="text-lg font-semibold text-gray-800">Barista</h3>
+                                <p class="text-md text-gray-600">«LoveKava», Dnipro</p>
+                                <p class="text-sm text-gray-500">Feb 2019 – Jun 2019</p>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="details-content">
+                            <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                                <li>Prepared coffee and related products.</li>
+                                <li>Managed financial reporting.</li>
+                                <li>Offered creative suggestions for the coffee shop.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item mb-8">
+                        <div class="cursor-pointer job-toggle flex justify-between items-center">
+                            <div class="flex-grow">
+                                <h3 class="text-lg font-semibold text-gray-800">Translator</h3>
+                                <p class="text-md text-gray-600">Self-employed</p>
+                                <p class="text-sm text-gray-500">Jan 2017 – Present</p>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="details-content">
+                            <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                                <li>Translated texts on various topics, including educational materials and product descriptions.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item mb-8">
+                        <div class="cursor-pointer job-toggle flex justify-between items-center">
+                            <div class="flex-grow">
+                                <h3 class="text-lg font-semibold text-gray-800">Restaurant Crew Member</h3>
+                                <p class="text-md text-gray-600">McDonald's, Dnipro</p>
+                                <p class="text-sm text-gray-500">Mar 2016 – Oct 2017</p>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="details-content">
+                            <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                                <li>Worked effectively in a team and maintained high standards.</li>
+                                <li>Prepared products according to company standards.</li>
+                                <li>Provided customer service and maintained a clean work area.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item mb-8">
+                        <div class="cursor-pointer job-toggle flex justify-between items-center">
+                            <div class="flex-grow">
+                                <h3 class="text-lg font-semibold text-gray-800">English Language Tutor</h3>
+                                <p class="text-md text-gray-600">Self-employed</p>
+                                <p class="text-sm text-gray-500">Sep 2015 – Present</p>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="details-content">
+                            <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                                <li>Selected teaching materials and assisted with homework.</li>
+                                <li>Used creative teaching methods, including analyzing series and songs.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item mb-8">
+                        <div class="cursor-pointer job-toggle flex justify-between items-center">
+                            <div class="flex-grow">
+                                <h3 class="text-lg font-semibold text-gray-800">Event Organizer</h3>
+                                <p class="text-md text-gray-600">Self-employed</p>
+                                <p class="text-sm text-gray-500">Nov 2014 – Present</p>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="details-content">
+                            <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                                <li>Negotiated and concluded contracts with landlords and sponsors.</li>
+                                <li>Developed event scenarios and programs, and found participants.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== PORTFOLIO SECTION with CASE STUDY ===== -->
+            <section id="portfolio" class="portfolio-section">
+                <div class="container">
+                    <h2 class="section-title">Portfolio</h2>
+                    <div class="portfolio-grid">
+
+                        <!-- ===== DIVEBOOKER CASE STUDY ===== -->
+                        <div class="portfolio-item">
+                            <a href="#" class="portfolio-link case-study-link" data-fullsize="divebooker-case-study.jpg" data-title="Divebooker.com — Organic Search Growth Case Study">
+                                <img src="divebooker-case-study.jpg" alt="Divebooker.com Organic Search Performance Case Study">
+                            </a>
+                            <div class="portfolio-info">
+                                <h3>Divebooker.com — SEO Growth</h3>
+                                <p>Organic search performance — Dec 2025 – Jun 2026</p>
+                                <div class="metrics">
+                                    <span>📈 +35.5% clicks</span>
+                                    <span>👁️ +35.6% impressions</span>
+                                    <span>📍 12.1 → 9.8 position</span>
+                                    <span>📄 46 articles</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pacific Dive Calendar (external PDF) -->
+                        <div class="portfolio-item">
+                            <a href="https://blog.divebooker.com/wp-content/uploads/2026/07/Pacific-Dive-Calendar-final.pdf" class="portfolio-link external" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none; color: inherit;">
+                                <img src="pacific-dive-calendar.jpg" alt="Pacific Dive Calendar – PDF">
+                                <div class="portfolio-info">
+                                    <h3>Pacific Dive Calendar</h3>
+                                    <p>Interactive PDF calendar for divers to choose the best trips by destination, conditions, and season.</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Pride Auto Transport -->
+                        <div class="portfolio-item">
+                            <a href="#" class="portfolio-link" data-fullsize="pride-auto-transport.jpg" data-title="Pride Auto Transport">
+                                <img src="pride-auto-transport.jpg" alt="Pride Auto Transport Website">
+                            </a>
+                            <div class="portfolio-info">
+                                <h3>Pride Auto Transport</h3>
+                                <p>Website for a company that specializes in car transportation.</p>
+                            </div>
+                        </div>
+
+                        <!-- Compare The Carrier (Homepage) -->
+                        <div class="portfolio-item">
+                            <a href="#" class="portfolio-link" data-fullsize="Compare-The-Carrier-Your-Truster-Logistics-Navigator.png" data-title="Compare The Carrier (Homepage)">
+                                <img src="Compare-The-Carrier-Your-Truster-Logistics-Navigator.png" alt="Compare The Carrier - Logistics Navigator Website">
+                            </a>
+                            <div class="portfolio-info">
+                                <h3>Compare The Carrier (Homepage)</h3>
+                                <p>Homepage design for a logistics company.</p>
+                            </div>
+                        </div>
+
+                        <!-- Compare The Carrier (Blog) -->
+                        <div class="portfolio-item">
+                            <a href="#" class="portfolio-link" data-fullsize="compare-carrier-blog.png" data-title="Compare The Carrier (Blog)">
+                                <img src="compare-carrier-blog.png" alt="Compare The Carrier Blog">
+                            </a>
+                            <div class="portfolio-info">
+                                <h3>Compare The Carrier (Blog)</h3>
+                                <p>Blog section with useful articles. Writing, content filling, and publication.</p>
+                            </div>
+                        </div>
+
+                        <!-- Compare The Carrier (Cases) -->
+                        <div class="portfolio-item">
+                            <a href="#" class="portfolio-link" data-fullsize="compare-carrier-cases.png" data-title="Compare The Carrier (Cases)">
+                                <img src="compare-carrier-cases.png" alt="Compare The Carrier Cases">
+                            </a>
+                            <div class="portfolio-info">
+                                <h3>Compare The Carrier (Cases)</h3>
+                                <p>Overview of the company's expertise and successful projects.</p>
+                            </div>
+                        </div>
+
+                        <!-- Compare The Carrier (YouTube) -->
+                        <div class="portfolio-item">
+                            <a href="#" class="portfolio-link" data-fullsize="compare-carrier-youtube.png" data-title="Compare The Carrier (YouTube)">
+                                <img src="compare-carrier-youtube.png" alt="Compare The Carrier YouTube Channel">
+                            </a>
+                            <div class="portfolio-info">
+                                <h3>Compare The Carrier (YouTube)</h3>
+                                <p>Video creation for the company's YouTube channel.</p>
+                            </div>
+                        </div>
+
+                        <!-- Drayage Service -->
+                        <div class="portfolio-item">
+                            <a href="#" class="portfolio-link" data-fullsize="Drayage-Service-–-GetCarrier-LLC-Full-Service-asset-based-3PL.png" data-title="Drayage Service (GetCarrier)">
+                                <img src="Drayage-Service-–-GetCarrier-LLC-Full-Service-asset-based-3PL.png" alt="Drayage Service Website">
+                            </a>
+                            <div class="portfolio-info">
+                                <h3>Drayage Service (GetCarrier)</h3>
+                                <p>Content filling of the website section dedicated to container shipping services.</p>
+                            </div>
+                        </div>
+
+                        <!-- Instagram Profiles -->
+                        <div class="portfolio-item">
+                            <a href="#" class="portfolio-link" data-fullsize="instagram-profiles.png" data-title="Examples of Instagram Profiles">
+                                <img src="instagram-profiles.png" alt="Instagram Profiles">
+                            </a>
+                            <div class="portfolio-info">
+                                <h3>Instagram Profiles</h3>
+                                <p>Examples of design and content for Instagram profiles for various clients.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== MODAL ===== -->
+            <div id="imageModal" class="modal">
+                <span class="close">&times;</span>
+                <img class="modal-content" id="modalImage">
+                <div id="caption"></div>
+                <!-- Case study detail content will be injected here if needed -->
             </div>
-        </header>
-<nav class="lang-switcher absolute top-4 right-4 text-sm font-semibold">
-    <a href="index.html" class="hover:text-[#a90534]">Укр</a>
-    <span class="text-gray-400">|</span>
-    <a href="index-en.html" class="active text-[#a90534]">Eng</a>
-</nav>
-        <section class="card">
-            <h2 class="section-title text-2xl font-semibold">Professional Summary</h2>
-            <p class="text-gray-700 leading-relaxed">
-                A highly skilled and motivated marketing and SEO specialist with 5 years of experience in content creation, search engine optimization, and social media management. I was responsible for the complete content marketing cycle, from keyword research to analytics and reporting, which contributed to increased visibility and audience engagement. I have strong skills in project management and cross-functional collaboration.
-            </p>
-        </section>
 
-        <section class="card">
-            <h2 class="section-title text-2xl font-semibold">Key Skills</h2>
-            <div id="skill-filters" class="flex flex-wrap justify-center gap-2 mb-8">
-                <button data-filter="all" class="skill-filter-btn active bg-[#4b066d] text-white px-4 py-2 rounded-full text-sm font-semibold">All</button>
-                <button data-filter="marketing" class="skill-filter-btn bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-100">Marketing & SEO</button>
-                <button data-filter="content" class="skill-filter-btn bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-100">Content Creation</button>
-                <button data-filter="tools" class="skill-filter-btn bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-100">Tools</button>
-            </div>
-            <div class="flex flex-wrap items-center">
-                <span class="skill-badge" data-category="marketing">Content Marketing</span>
-                <span class="skill-badge" data-category="marketing">SEO Strategies</span>
-                <span class="skill-badge" data-category="marketing">Link Building</span>
-                <span class="skill-badge" data-category="marketing">PPC</span>
-                <span class="skill-badge" data-category="marketing">SMM</span>
-                <span class="skill-badge" data-category="marketing">Web Analytics</span>
-                <span class="skill-badge" data-category="marketing">Rank Math</span>
-                <span class="skill-badge" data-category="marketing">Market Analysis & Research</span>
-                <span class="skill-badge" data-category="marketing">Project Management</span>
-                
-                <span class="skill-badge" data-category="content">Article & Blog Post Writing</span>
-                <span class="skill-badge" data-category="content">Video Scripting</span>
-                <span class="skill-badge" data-category="content">Image & Video Creation</span>
-                <span class="skill-badge" data-category="content">Retouching</span>
-                <span class="skill-badge" data-category="content">Photography</span>
-                <span class="skill-badge" data-category="content">Canva</span>
-                <span class="skill-badge" data-category="content">Adobe (Photoshop, Lightroom)</span>
+            <section class="card">
+                <div class="flex flex-col md:flex-row md:space-x-8 space-y-8 md:space-y-0">
+                    <div class="flex-1">
+                        <h2 class="section-title text-2xl font-semibold">Education & Certifications</h2>
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-xl font-medium text-[#4b066d]">Oles Honchar Dnipro National University</h3>
+                                <p class="text-sm text-gray-500">Faculty of Economics (2015 – 2019)</p>
+                            </div>
+                            <h3 class="text-xl font-medium text-gray-800">Additional Education & Courses</h3>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>Social Media, Hubspot Academy (2022)</li>
+                                <li>The Fundamentals of Digital Marketing, Google Digital Garage (2022)</li>
+                                <li>Google Analytics for Beginners, Google Analytics Academy (2022)</li>
+                                <li>Content Marketing, Hubspot Academy (2022)</li>
+                                <li>Facebook Marketing and Advertising, SkillUp (2022)</li>
+                                <li>Summer English Institute (2014, 2015, 2016)</li>
+                                <li>Oxford Language Centre (2013)</li>
+                                <li>Brighton Language College (2018)</li>
+                            </ul>
+                        </div>
+                    </div>
 
-                <span class="skill-badge" data-category="tools">Google Analytics</span>
-                <span class="skill-badge" data-category="tools">Google Search Console</span>
-                <span class="skill-badge" data-category="tools">Meta Business Suite</span>
-                <span class="skill-badge" data-category="tools">WordPress</span>
-                <span class="skill-badge" data-category="tools">OkayCMS</span>
-                <span class="skill-badge" data-category="tools">OpenCart</span>
-                <span class="skill-badge" data-category="tools">Ahrefs</span>
-                <span class="skill-badge" data-category="tools">Asana</span>
-                <span class="skill-badge" data-category="tools">Google Docs / Sheets</span>
-            </div>
-        </section>
+                    <div class="flex-1">
+                        <h2 class="section-title text-2xl font-semibold">Language Proficiency</h2>
+                        <div class="space-y-4">
+                            <div class="space-y-1">
+                                <div class="flex justify-between items-center text-gray-700">
+                                    <p class="font-medium">Ukrainian</p>
+                                    <span class="text-sm font-semibold">Fluent</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-[#a90534] h-2.5 rounded-full" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <div class="flex justify-between items-center text-gray-700">
+                                    <p class="font-medium">English</p>
+                                    <span class="text-sm font-semibold">Advanced</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-[#a90534] h-2.5 rounded-full" style="width: 80%;"></div>
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <div class="flex justify-between items-center text-gray-700">
+                                    <p class="font-medium">German</p>
+                                    <span class="text-sm font-semibold">Beginner</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-[#a90534] h-2.5 rounded-full" style="width: 30%;"></div>
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <div class="flex justify-between items-center text-gray-700">
+                                    <p class="font-medium">Spanish</p>
+                                    <span class="text-sm font-semibold">Beginner</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-[#a90534] h-2.5 rounded-full" style="width: 30%;"></div>
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <div class="flex justify-between items-center text-gray-700">
+                                    <p class="font-medium">Russian</p>
+                                    <span class="text-sm font-semibold">Fluent</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-gray-400 h-2.5 rounded-full" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-        <section class="card">
-            <h2 class="section-title text-2xl font-semibold">Work Experience</h2>
-            <div class="relative pl-10 border-l-2 border-dashed border-gray-300">
-                <div class="timeline-item mb-8">
-<div class="cursor-pointer job-toggle flex justify-between items-center">
-    <div class="flex-grow">
-                        <h3 class="text-lg font-semibold text-gray-800">Freelancer</h3>
-                        <p class="text-md text-gray-600">Self-employed</p>
-                        <p class="text-sm text-gray-500">May 2025 – Present</p>
-           </div>
-    <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-    </svg>
-</div>
-                    <div class="details-content">
-                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
-                            <li>Independently managed projects, time, and client communication.</li>
-                            <li>Utilized SEO and content marketing skills for various projects.</li>
-                            <li>Implemented comprehensive strategies to increase online presence.</li>
-                        </ul>
-                    </div>
-                </div>
-
-        <!-- Job Item (Divebooker) -->
-<div class="timeline-item mb-8">
-<div class="cursor-pointer job-toggle flex justify-between items-center">
-<div class="flex-grow">
-<h3 class="text-lg font-semibold text-gray-800">Content & SEO Specialist</h3>
-<p class="text-md text-gray-600">Divebooker.com (Remote)</p>
-<p class="text-sm text-gray-500">Dec 2025 – Jul 2026</p>
-</div>
-<svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
-<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-</svg>
-</div>
-<div class="details-content">
-<ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
-<li>Managed content strategy and SEO optimization for Divebooker.com, a liveaboard diving booking platform, including boat/trip page content and blog articles.</li>
-<li>Analyzed Google Search Console and organic traffic data to identify content gaps and prioritize high-impact optimization opportunities across boat and destination pages.</li>
-<li>Developed data-driven content briefs and case studies for liveaboard trip pages (e.g., Black Manta, Royal Evolution, Ambai) to support conversion-focused content updates.</li>
-<li>Recommended and scoped portfolio-level improvements (PDF trip calendars, boat page pop-ups) informed by performance data analysis.</li>
-</ul>
-</div>
-</div>
-<!-- Job Item (Locomotive Media Group) -->
-<div class="timeline-item mb-8">
-<div class="cursor-pointer job-toggle flex justify-between items-center">
-<div class="flex-grow">
-<h3 class="text-lg font-semibold text-gray-800">SEO Manager</h3>
-<p class="text-md text-gray-600">Locomotive Media Group (Agency, Remote)</p>
-<p class="text-sm text-gray-500">Nov 2025 – Feb 2026</p>
-</div>
-<svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
-<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-</svg>
-</div>
-<div class="details-content">
-<ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
-<li>Conducted full technical SEO audits (hreflang/lang configuration, metadata, URL structure, robots.txt, backlink profile) for agency clients, including elma-consulting.ua, delivering prioritized recommendations.</li>
-<li>Built semantic cores and site-structure maps for multiple clients (legal/accounting services, international fintech consulting) using Serpstat, and redesigned information architecture (product tree, site menu) for a legal/accounting client.</li>
-<li>Performed competitor keyword and backlink analysis (Ahrefs, Serpstat) for a fintech consulting client, benchmarking against key industry competitors.</li>
-<li>Audited backlink profiles (2,500+ referring pages) via Ahrefs to identify link-building opportunities and flag low-quality links.</li>
-<li>Deepened hands-on expertise in SE Ranking, Ahrefs, Google Search Console/Analytics, and AI Overview optimization strategy through structured agency training.</li>
-</ul>
-</div>
-</div>
-
-                <div class="timeline-item mb-8">
-<div class="cursor-pointer job-toggle flex justify-between items-center">
-    <div class="flex-grow">
-                        <h3 class="text-lg font-semibold text-gray-800">Content and SEO Specialist</h3>
-                        <p class="text-md text-gray-600">Compare The Carrier</p>
-                        <p class="text-sm text-gray-500">Dec 2021 – May 2025</p>
-                 </div>
-    <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-    </svg>
-</div>
-                    <div class="details-content">
-                        <p class="text-gray-700 leading-relaxed">
-                            As a Content and SEO Specialist, my role encompassed a wide range of tasks aimed at improving digital presence and organic search performance. I was responsible for creating, optimizing, and managing content across various platforms, including articles, blog posts, and web pages. My work contributed to increased visibility, improved keyword rankings, and enhanced user engagement for key projects in the transportation and logistics sectors.
-                        </p>
-                        <h4 class="text-lg font-semibold text-gray-800 mt-4">Key Responsibilities and Achievements:</h4>
-                        
-                        <h5 class="text-md font-semibold text-gray-700 mt-2">Content Creation & Management:</h5>
-                        <ul class="mt-2 list-disc list-inside text-gray-600 space-y-1">
-                            <li>Created content for various digital platforms, including video scripts and concepts, short social media videos, text for new pages and B2B communications, and social media content.</li>
-                            <li>Managed the publication and optimization process, including adding photos, videos, and updating existing articles.</li>
-                        </ul>
-                        
-                        <h5 class="text-md font-semibold text-gray-700 mt-2">Search Engine Optimization (SEO):</h5>
-                        <ul class="mt-2 list-disc list-inside text-gray-600 space-y-1">
-                            <li>Implemented comprehensive SEO strategies, including keyword research and competitor analysis.</li>
-                            <li>Managed link-building campaigns and conducted technical SEO audits.</li>
-                            <li>Monitored and reported on key performance indicators (SEO and SMM reports).</li>
-                            <li>Tracked current trends in SEO.</li>
-                            <li>Developed infographics and visual materials for content.</li>
-                            <li>Managed on-page SEO.</li>
-                        </ul>
-                        
-                        <h5 class="text-md font-semibold text-gray-700 mt-2">Project & Task Coordination:</h5>
-                        <ul class="mt-2 list-disc list-inside text-gray-600 space-y-1">
-                            <li>Organized and managed weekly tasks in Asana.</li>
-                            <li>Provided regular reports on work progress.</li>
-                            <li>Collaborated with team members.</li>
-                            <li>Prepared and delivered presentations on SEO strategies.</li>
-                            <li>Managed and organized content materials.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item mb-8">
- <div class="cursor-pointer job-toggle flex justify-between items-center">
-    <div class="flex-grow">
-                        <h3 class="text-lg font-semibold text-gray-800">Trade Marketer</h3>
-                        <p class="text-md text-gray-600">DTI, Dnipro</p>
-                        <p class="text-sm text-gray-500">Jun 2020 – Apr 2021</p>
-           </div>
-    <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-    </svg>
-</div>
-                    <div class="details-content">
-                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
-                            <li>Controlled the availability of marketing products, ordered them, found suppliers, and developed and maintained registries.</li>
-                            <li>Evaluated video materials and managed YouTube channels.</li>
-                            <li>Filled websites with information on OkayCMS and OpenCart platforms.</li>
-                            <li>Accepted branding briefs and delegated tasks to designers and printing services.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item mb-8">
- <div class="cursor-pointer job-toggle flex justify-between items-center">
-    <div class="flex-grow">
-                        <h3 class="text-lg font-semibold text-gray-800">Administrator</h3>
-                        <p class="text-md text-gray-600">Yoga Center "Selfcentr", Dnipro</p>
-                        <p class="text-sm text-gray-500">Dec 2019 – Apr 2020</p>
-               </div>
-    <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-    </svg>
-</div>
-                    <div class="details-content">
-                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
-                            <li>Managed attendance statistics and sales of memberships.</li>
-                            <li>Created schedules and handled financial reporting.</li>
-                            <li>Ensured premises cleanliness and ordered household goods.</li>
-                        </ul>
-                    </div>
-                </div>
-                 <div class="timeline-item mb-8">
-<div class="cursor-pointer job-toggle flex justify-between items-center">
-    <div class="flex-grow">
-                        <h3 class="text-lg font-semibold text-gray-800">Service Specialist</h3>
-                        <p class="text-md text-gray-600">JSC "Universal Bank", Monobank Project</p>
-                        <p class="text-sm text-gray-500">Jun 2019 – Aug 2019</p>
-                  </div>
-    <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-    </svg>
-</div>
-                    <div class="details-content">
-                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
-                            <li>Provided customer service via phone and chat, offering necessary information.</li>
-                            <li>Effectively resolved customer issues.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item mb-8">
-       <div class="cursor-pointer job-toggle flex justify-between items-center">
-    <div class="flex-grow">
-                        <h3 class="text-lg font-semibold text-gray-800">Barista</h3>
-                        <p class="text-md text-gray-600">«LoveKava», Dnipro</p>
-                        <p class="text-sm text-gray-500">Feb 2019 – Jun 2019</p>
-                  </div>
-    <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-    </svg>
-</div>
-                    <div class="details-content">
-                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
-                            <li>Prepared coffee and related products.</li>
-                            <li>Managed financial reporting.</li>
-                            <li>Offered creative suggestions for the coffee shop.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item mb-8">
-<div class="cursor-pointer job-toggle flex justify-between items-center">
-    <div class="flex-grow">
-                        <h3 class="text-lg font-semibold text-gray-800">Translator</h3>
-                        <p class="text-md text-gray-600">Self-employed</p>
-                        <p class="text-sm text-gray-500">Jan 2017 – Present</p>
-              </div>
-    <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-    </svg>
-</div>
-                    <div class="details-content">
-                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
-                            <li>Translated texts on various topics, including educational materials and product descriptions.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item mb-8">
-  <div class="cursor-pointer job-toggle flex justify-between items-center">
-    <div class="flex-grow">
-                        <h3 class="text-lg font-semibold text-gray-800">Restaurant Crew Member</h3>
-                        <p class="text-md text-gray-600">McDonald's, Dnipro</p>
-                        <p class="text-sm text-gray-500">Mar 2016 – Oct 2017</p>
-                  </div>
-    <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-    </svg>
-</div>
-                    <div class="details-content">
-                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
-                            <li>Worked effectively in a team and maintained high standards.</li>
-                            <li>Prepared products according to company standards.</li>
-                            <li>Provided customer service and maintained a clean work area.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item mb-8">
-<div class="cursor-pointer job-toggle flex justify-between items-center">
-    <div class="flex-grow">
-                        <h3 class="text-lg font-semibold text-gray-800">English Language Tutor</h3>
-                        <p class="text-md text-gray-600">Self-employed</p>
-                        <p class="text-sm text-gray-500">Sep 2015 – Present</p>
-                </div>
-    <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-    </svg>
-</div>
-                    <div class="details-content">
-                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
-                            <li>Selected teaching materials and assisted with homework.</li>
-                            <li>Used creative teaching methods, including analyzing series and songs.</li>
-                        </ul>
-                    </div>
-                </div>
-                 <div class="timeline-item mb-8">
-<div class="cursor-pointer job-toggle flex justify-between items-center">
-    <div class="flex-grow">
-                        <h3 class="text-lg font-semibold text-gray-800">Event Organizer</h3>
-                        <p class="text-md text-gray-600">Self-employed</p>
-                        <p class="text-sm text-gray-500">Nov 2014 – Present </p>
-  </div>
-    <svg class="w-4 h-4 text-gray-500 ml-2 transform transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-    </svg>
-</div>
-                    <div class="details-content">
-                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
-                            <li>Negotiated and concluded contracts with landlords and sponsors.</li>
-                            <li>Developed event scenarios and programs, and found participants.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-<section id="portfolio" class="portfolio-section">
-    <div class="container">
-        <h2 class="section-title">Portfolio</h2>
-        <div class="portfolio-grid">
-
-<div class="portfolio-item">
-    <a href="https://blog.divebooker.com/wp-content/uploads/2026/07/Pacific-Dive-Calendar-final.pdf" 
-       class="portfolio-link external" 
-       target="_blank" 
-       rel="noopener noreferrer"
-       style="display: block; text-decoration: none; color: inherit;">
-        <img src="pacific-dive-calendar.jpg" alt="Pacific Dive Calendar – PDF">
-        <div class="portfolio-info">
-            <h3>Pacific Dive Calendar</h3>
-            <p>Interactive PDF calendar for divers to choose the best trips by destination, conditions, and season.</p>
+            <footer class="text-center text-gray-500 text-sm py-8">
+                <p>&copy; 2025 Anastasiia Safronova. All rights reserved.</p>
+            </footer>
         </div>
-    </a>
-</div>
-            
-            <div class="portfolio-item">
-                <a href="#" class="portfolio-link" data-fullsize="pride-auto-transport.jpg" data-title="Pride Auto Transport">
-                    <img src="pride-auto-transport.jpg" alt="Pride Auto Transport Website">
-                </a>
-                <div class="portfolio-info">
-                    <h3>Pride Auto Transport</h3>
-                    <p>Website for a company that specializes in car transportation.</p>
-                </div>
-            </div>
-            
-            <div class="portfolio-item">
-                <a href="#" class="portfolio-link" data-fullsize="Compare-The-Carrier-Your-Truster-Logistics-Navigator.png" data-title="Compare The Carrier (Homepage)">
-                    <img src="Compare-The-Carrier-Your-Truster-Logistics-Navigator.png" alt="Compare The Carrier - Logistics Navigator Website">
-                </a>
-                <div class="portfolio-info">
-                    <h3>Compare The Carrier (Homepage)</h3>
-                    <p>Homepage design for a logistics company.</p>
-                </div>
-            </div>
 
-            <div class="portfolio-item">
-                <a href="#" class="portfolio-link" data-fullsize="compare-carrier-blog.png" data-title="Compare The Carrier (Blog)">
-                    <img src="compare-carrier-blog.png" alt="Compare The Carrier Blog">
-                </a>
-                <div class="portfolio-info">
-                    <h3>Compare The Carrier (Blog)</h3>
-                    <p>Blog section with useful articles. Writing, content filling, and publication.</p>
-                </div>
-            </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const skillFilterButtons = document.querySelectorAll('.skill-filter-btn');
+                const skillTags = document.querySelectorAll('.skill-badge');
+                const jobToggles = document.querySelectorAll('.job-toggle');
 
-            <div class="portfolio-item">
-                <a href="#" class="portfolio-link" data-fullsize="compare-carrier-cases.png" data-title="Compare The Carrier (Cases)">
-                    <img src="compare-carrier-cases.png" alt="Compare The Carrier Cases">
-                </a>
-                <div class="portfolio-info">
-                    <h3>Compare The Carrier (Cases)</h3>
-                    <p>Overview of the company's expertise and successful projects.</p>
-                </div>
-            </div>
+                skillFilterButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const filter = button.dataset.filter;
 
-            <div class="portfolio-item">
-                <a href="#" class="portfolio-link" data-fullsize="compare-carrier-youtube.png" data-title="Compare The Carrier (YouTube)">
-                    <img src="compare-carrier-youtube.png" alt="Compare The Carrier YouTube Channel">
-                </a>
-                <div class="portfolio-info">
-                    <h3>Compare The Carrier (YouTube)</h3>
-                    <p>Video creation for the company's YouTube channel.</p>
-                </div>
-            </div>
+                        skillFilterButtons.forEach(btn => {
+                            btn.classList.remove('active', 'bg-[#4b066d]', 'text-white');
+                            btn.classList.add('bg-white', 'text-gray-700');
+                        });
+                        button.classList.add('active', 'bg-[#4b066d]', 'text-white');
+                        button.classList.remove('bg-white', 'text-gray-700');
 
-            <div class="portfolio-item">
-                <a href="#" class="portfolio-link" data-fullsize="Drayage-Service-–-GetCarrier-LLC-Full-Service-asset-based-3PL.png" data-title="Drayage Service (GetCarrier)">
-                    <img src="Drayage-Service-–-GetCarrier-LLC-Full-Service-asset-based-3PL.png" alt="Drayage Service Website">
-                </a>
-                <div class="portfolio-info">
-                    <h3>Drayage Service (GetCarrier)</h3>
-                    <p>Content filling of the website section dedicated to container shipping services.</p>
-                </div>
-            </div>
-
-            <div class="portfolio-item">
-                <a href="#" class="portfolio-link" data-fullsize="instagram-profiles.png" data-title="Examples of Instagram Profiles">
-                    <img src="instagram-profiles.png" alt="Instagram Profiles">
-                </a>
-                <div class="portfolio-info">
-                    <h3>Instagram Profiles</h3>
-                    <p>Examples of design and content for Instagram profiles for various clients.</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-        
-<div id="imageModal" class="modal">
-    <span class="close">&times;</span>
-    <img class="modal-content" id="modalImage">
-    <div id="caption"></div>
-</div>
-        
-        <section class="card">
-            <div class="flex flex-col md:flex-row md:space-x-8 space-y-8 md:space-y-0">
-                <div class="flex-1">
-                    <h2 class="section-title text-2xl font-semibold">Education & Certifications</h2>
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="text-xl font-medium text-[#4b066d]">Oles Honchar Dnipro National University</h3>
-                            <p class="text-sm text-gray-500">Faculty of Economics (2015 – 2019)</p>
-                        </div>
-                        <h3 class="text-xl font-medium text-gray-800">Additional Education & Courses</h3>
-                        <ul class="list-disc list-inside text-gray-700 space-y-1">
-                            <li>Social Media, Hubspot Academy (2022)</li>
-                            <li>The Fundamentals of Digital Marketing, Google Digital Garage (2022)</li>
-                            <li>Google Analytics for Beginners, Google Analytics Academy (2022)</li>
-                            <li>Content Marketing, Hubspot Academy (2022)</li>
-                            <li>Facebook Marketing and Advertising, SkillUp (2022)</li>
-                            <li>Summer English Institute (2014, 2015, 2016)</li>
-                            <li>Oxford Language Centre (2013)</li>
-                            <li>Brighton Language College (2018)</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="flex-1">
-                    <h2 class="section-title text-2xl font-semibold">Language Proficiency</h2>
-                    <div class="space-y-4">
-                        <div class="space-y-1">
-                            <div class="flex justify-between items-center text-gray-700">
-                                <p class="font-medium">Ukrainian</p>
-                                <span class="text-sm font-semibold">Fluent</span>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                <div class="bg-[#a90534] h-2.5 rounded-full" style="width: 100%;"></div>
-                            </div>
-                        </div>
-                        <div class="space-y-1">
-                            <div class="flex justify-between items-center text-gray-700">
-                                <p class="font-medium">English</p>
-                                <span class="text-sm font-semibold">Advanced</span>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                <div class="bg-[#a90534] h-2.5 rounded-full" style="width: 80%;"></div>
-                            </div>
-                        </div>
-                        <div class="space-y-1">
-                            <div class="flex justify-between items-center text-gray-700">
-                                <p class="font-medium">German</p>
-                                <span class="text-sm font-semibold">Beginner</span>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                <div class="bg-[#a90534] h-2.5 rounded-full" style="width: 30%;"></div>
-                            </div>
-                        </div>
-                        <div class="space-y-1">
-                            <div class="flex justify-between items-center text-gray-700">
-                                <p class="font-medium">Spanish</p>
-                                <span class="text-sm font-semibold">Beginner</span>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                <div class="bg-[#a90534] h-2.5 rounded-full" style="width: 30%;"></div>
-                            </div>
-                        </div>
-                        <div class="space-y-1">
-                            <div class="flex justify-between items-center text-gray-700">
-                                <p class="font-medium">Russian</p>
-                                <span class="text-sm font-semibold">Fluent</span>
-                            </div>
-                            <div class="w-full bg-gray-200 rounded-full h-2.5">
-                               <div class="bg-gray-400 h-2.5 rounded-full" style="width: 100%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <footer class="text-center text-gray-500 text-sm py-8">
-            <p>&copy; 2025 Anastasiia Safronova. All rights reserved.</p>
-        </footer>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const skillFilterButtons = document.querySelectorAll('.skill-filter-btn');
-            const skillTags = document.querySelectorAll('.skill-badge');
-            const jobToggles = document.querySelectorAll('.job-toggle');
-
-            skillFilterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const filter = button.dataset.filter;
-
-                    skillFilterButtons.forEach(btn => {
-                        btn.classList.remove('active', 'bg-[#4b066d]', 'text-white');
-                        btn.classList.add('bg-white', 'text-gray-700');
+                        skillTags.forEach(tag => {
+                            if (filter === 'all' || tag.dataset.category === filter) {
+                                tag.style.display = 'inline-block';
+                            } else {
+                                tag.style.display = 'none';
+                            }
+                        });
                     });
-                    button.classList.add('active', 'bg-[#4b066d]', 'text-white');
-                    button.classList.remove('bg-white', 'text-gray-700');
+                });
 
-                    skillTags.forEach(tag => {
-                        if (filter === 'all' || tag.dataset.category === filter) {
-                            tag.style.display = 'inline-block';
-                        } else {
-                            tag.style.display = 'none';
+                jobToggles.forEach(toggle => {
+                    toggle.addEventListener('click', () => {
+                        const content = toggle.nextElementSibling;
+                        content.classList.toggle('open');
+                        const arrowIcon = toggle.querySelector('svg');
+                        if (arrowIcon) {
+                            arrowIcon.classList.toggle('rotate-180');
                         }
                     });
                 });
             });
+        </script>
 
-            jobToggles.forEach(toggle => {
-                toggle.addEventListener('click', () => {
-                    const content = toggle.nextElementSibling;
-                    content.classList.toggle('open');
-                    const arrowIcon = toggle.querySelector('svg');
-                    if (arrowIcon) {
-                        arrowIcon.classList.toggle('rotate-180');
+        <script>
+            // Modal logic
+            var modal = document.getElementById("imageModal");
+            var modalImg = document.getElementById("modalImage");
+            var captionText = document.getElementById("caption");
+
+            var links = document.getElementsByClassName("portfolio-link");
+            for (var i = 0; i < links.length; i++) {
+                if (links[i].classList.contains("external")) {
+                    continue;
+                }
+                links[i].onclick = function(event) {
+                    event.preventDefault();
+                    modal.style.display = "block";
+                    modalImg.src = this.getAttribute("data-fullsize");
+                    var title = this.getAttribute("data-title") || "";
+
+                    // If this is the case study, add extra detail
+                    if (this.classList.contains("case-study-link")) {
+                        captionText.innerHTML = `
+                                <div class="case-study-detail">
+                                    <h3 style="font-size:1.6em;color:#fff;margin-bottom:12px;">${title}</h3>
+                                    <div class="highlight-grid">
+                                        <div class="stat"><div class="number">+35.5%</div><div class="label">Organic clicks</div></div>
+                                        <div class="stat"><div class="number">+35.6%</div><div class="label">Impressions</div></div>
+                                        <div class="stat"><div class="number" style="color:#ffb347;">12.1 → 9.8</div><div class="label">Avg. search position <span style="color:#aaa;font-size:0.8em;">(lower is better)</span></div></div>
+                                        <div class="stat"><div class="number" style="color:#6fcf97;">46</div><div class="label">Articles published</div></div>
+                                    </div>
+                                    <h4>📈 What drove the growth</h4>
+                                    <ul>
+                                        <li><strong>46 SEO-optimized articles</strong>, including 4 destination content clusters (Red Sea, Caribbean, Galapagos, Indonesia) and an evergreen <em>"Where to Dive in [Month]"</em> series.</li>
+                                        <li>Designed and rolled out a <strong>new blog content structure</strong> across the site.</li>
+                                        <li>Refreshed <strong>25+ existing articles</strong>: cleaned tracking parameters and added internal links from articles to country/destination pages.</li>
+                                        <li>Built and documented an <strong>SOP</strong> for article creation and editing to standardize keyword research, briefs, and publishing.</li>
+                                    </ul>
+                                    <p style="margin-top:12px;color:#aaa;font-size:0.9em;">📊 Source: Google Search Console (Web search, last 12 months, divebooker.com) — Dec 2025 vs Jun 2026.</p>
+                                </div>
+                            `;
+                    } else {
+                        captionText.innerHTML = title;
                     }
-                });
-            });
-        });
-    </script>
-<script>
-    // Getting the modal window
-    var modal = document.getElementById("imageModal");
+                }
+            }
 
-    // Getting the image and caption in the modal window
-    var modalImg = document.getElementById("modalImage");
-    var captionText = document.getElementById("caption");
+            var span = document.getElementsByClassName("close")[0];
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
 
-    // Getting all image links
-var links = document.getElementsByClassName("portfolio-link");
-for (var i = 0; i < links.length; i++) {
-    // Пропускаємо зовнішні посилання (з класом "external")
-    if (links[i].classList.contains("external")) {
-        continue;
-    }
-    links[i].onclick = function(event) {
-        event.preventDefault();
-        modal.style.display = "block";
-        modalImg.src = this.getAttribute("data-fullsize");
-        captionText.innerHTML = this.getAttribute("data-title");
-    }
-}
-
-    // Getting the close button (x)
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on (x), close the modal window
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // Close the modal window if the click is outside the image
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
-</body>
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
+    </body>
 </html>
-
 
