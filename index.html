@@ -898,60 +898,141 @@
             });
         });
     </script>
-    <script>
-        // Modal logic
-        var modal = document.getElementById("imageModal");
-        var modalImg = document.getElementById("modalImage");
-        var captionText = document.getElementById("caption");
 
-        var links = document.getElementsByClassName("portfolio-link");
-        for (var i = 0; i < links.length; i++) {
-            if (links[i].classList.contains("external")) {
-                continue;
-            }
-            links[i].onclick = function(event) {
-                event.preventDefault();
-                modal.style.display = "block";
-                modalImg.src = this.getAttribute("data-fullsize");
-                var title = this.getAttribute("data-title") || "";
+                    <script>
+    // Отримання модального вікна
+    var modal = document.getElementById("imageModal");
 
-                // If this is the case study, inject detailed Ukrainian content
-                if (this.classList.contains("case-study-link")) {
-                    captionText.innerHTML = `
-                            <div class="case-study-detail">
-                                <h3 style="font-size:1.6em;color:#fff;margin-bottom:12px;">${title}</h3>
-                                <div class="highlight-grid">
-                                    <div class="stat"><div class="number">+35.5%</div><div class="label">Органічні кліки</div></div>
-                                    <div class="stat"><div class="number">+35.6%</div><div class="label">Покази</div></div>
-                                    <div class="stat"><div class="number" style="color:#ffb347;">12.1 → 9.8</div><div class="label">Середня позиція <span style="color:#aaa;font-size:0.8em;">(менше краще)</span></div></div>
-                                    <div class="stat"><div class="number" style="color:#6fcf97;">46</div><div class="label">Опубліковано статей</div></div>
-                                </div>
-                                <h4>📈 Що сприяло зростанню</h4>
-                                <ul>
-                                    <li><strong>46 SEO-оптимізованих статей</strong>, включаючи 4 кластери контенту за напрямками (Червоне море, Кариби, Галапагоси, Індонезія) та серію <em>"Де пірнати у [Місяць]"</em>.</li>
-                                    <li>Розробила та впровадила <strong>нову структуру блогу</strong> на всьому сайті.</li>
-                                    <li>Оновила <strong>25+ існуючих статей</strong>: очистила параметри відстеження та додала внутрішні посилання зі статей на сторінки країн/напрямків.</li>
-                                    <li>Створила та задокументувала <strong>SOP</strong> для створення та редагування статей, щоб стандартизувати дослідження ключових слів, брифінг та публікацію.</li>
-                                </ul>
-                                <p style="margin-top:12px;color:#aaa;font-size:0.9em;">📊 Джерело: Google Search Console (веб-пошук, останні 12 місяців, divebooker.com) — грудень 2025 vs червень 2026.</p>
+    // Отримання зображення та підпису в модальному вікні
+    var modalImg = document.getElementById("modalImage");
+    var captionText = document.getElementById("caption");
+
+    // Отримання всіх посилань на зображення
+    var links = document.getElementsByClassName("portfolio-link");
+    for (var i = 0; i < links.length; i++) {
+        // Пропускаємо зовнішні посилання (з класом "external")
+        if (links[i].classList.contains("external")) {
+            continue;
+        }
+        links[i].onclick = function(event) {
+            event.preventDefault();
+            modal.style.display = "block";
+            modalImg.src = this.getAttribute("data-fullsize") || 'default-placeholder.jpg';
+            var title = this.getAttribute("data-title") || "";
+
+            // ============================================================
+            // ЯКЩО ЦЕ КЕЙС-СТАДІ (має спеціальний клас) - ВСТАВЛЯЄМО ТЕКСТ
+            // ============================================================
+            if (this.classList.contains('case-study-link')) {
+                var detailHTML = '';
+
+                // Перевіряємо, який саме кейс за назвою (data-title)
+                if (title.includes('n5deal.com') || title.includes('SEO-аудит')) {
+                    detailHTML = `
+                        <div class="case-study-detail">
+                            <h3 style="font-size:1.6em;color:#fff;margin-bottom:12px;">${title}</h3>
+                            <h4>🔍 Що зроблено</h4>
+                            <ul>
+                                <li><strong>Технічний аудит</strong> – перевірка індексації, robots.txt, sitemap, SSL, hreflang, швидкості.</li>
+                                <li><strong>Аналіз конкурентів</strong> – визначення топ-гравців у ніші (dealroom.net, axial.net).</li>
+                                <li><strong>Семантичне ядро</strong> – збір запитів для категорій і фільтрів.</li>
+                                <li><strong>Стратегія контенту</strong> – рекомендації щодо гайдів, порівнянь юрисдикцій.</li>
+                                <li><strong>План на 1 місяць</strong> – детальний графік робіт з ТЗ для розробників.</li>
+                            </ul>
+                            <p style="margin-top:12px;color:#aaa;font-size:0.9em;">📄 Документи: брифінг, аналіз, підготовчий етап, помісячний план.</p>
+                        </div>
+                    `;
+                } else if (title.includes('Chudo-Ostriv') || title.includes('Семантична розмітка')) {
+                    detailHTML = `
+                        <div class="case-study-detail">
+                            <h3 style="font-size:1.6em;color:#fff;margin-bottom:12px;">${title}</h3>
+                            <h4>📋 Завдання</h4>
+                            <p>Розробити та впровадити JSON‑LD розмітку Schema.org для всіх типів сторінок інтернет-магазину іграшок.</p>
+                            <h4>🧩 Типи розмітки</h4>
+                            <ul>
+                                <li><strong>WebSite, Organization, ContactPoint</strong> – для головної</li>
+                                <li><strong>CollectionPage, ItemList</strong> – для категорій та фільтрів</li>
+                                <li><strong>Product, Offer</strong> – для карток товарів (з акційними цінами)</li>
+                                <li><strong>Article / BlogPosting</strong> – для статей блогу</li>
+                                <li><strong>BreadcrumbList</strong> – на всіх сторінках (крім головної)</li>
+                            </ul>
+                            <h4>✅ Результат</h4>
+                            <ul>
+                                <li>Повне покриття розміткою, усунення помилок у валідації</li>
+                                <li>Підвищення CTR за рахунок розширених сніпетів</li>
+                                <li>Детальне ТЗ з прикладами коду для кожного типу</li>
+                            </ul>
+                        </div>
+                    `;
+                } else if (title.includes('Akon') || title.includes('метаданих') || title.includes('Automation')) {
+                    detailHTML = `
+                        <div class="case-study-detail">
+                            <h3 style="font-size:1.6em;color:#fff;margin-bottom:12px;">${title}</h3>
+                            <h4>⚙️ Мета</h4>
+                            <p>Автоматизувати формування Title, Description та H1 для всіх сторінок інтернет-магазину.</p>
+                            <h4>📐 Приклади формул</h4>
+                            <ul>
+                                <li><strong>Сторінки фільтрів:</strong> «[Назва категорії]: [Назва фільтру] - [Значення]»</li>
+                                <li><strong>Картки товарів:</strong> «[H1 товару] - Купити [категорія] в інтернет-магазині Akon»</li>
+                                <li><strong>Пагінація:</strong> «[H1 сторінки] - Страница [номер] | Akon»</li>
+                            </ul>
+                            <h4>📌 Критерії успіху</h4>
+                            <ul>
+                                <li>Унікальність метаданих для кожної сторінки</li>
+                                <li>Читабельність для користувачів і пошукових систем</li>
+                                <li>Відсутність пустих полів</li>
+                            </ul>
+                        </div>
+                    `;
+                } else if (title.includes('Divebooker')) {
+                    // Залишаємо старий текст для Divebooker, якщо він ще потрібен
+                    detailHTML = `
+                        <div class="case-study-detail">
+                            <h3 style="font-size:1.6em;color:#fff;margin-bottom:12px;">${title}</h3>
+                            <div class="highlight-grid">
+                                <div class="stat"><div class="number">+35.5%</div><div class="label">Органічні кліки</div></div>
+                                <div class="stat"><div class="number">+35.6%</div><div class="label">Покази</div></div>
+                                <div class="stat"><div class="number" style="color:#ffb347;">12.1 → 9.8</div><div class="label">Середня позиція</div></div>
+                                <div class="stat"><div class="number" style="color:#6fcf97;">46</div><div class="label">Опубліковано статей</div></div>
                             </div>
-                        `;
+                            <h4>📈 Що сприяло зростанню</h4>
+                            <ul>
+                                <li><strong>46 SEO-оптимізованих статей</strong>, включаючи 4 кластери контенту за напрямками.</li>
+                                <li>Розробила та впровадила <strong>нову структуру блогу</strong>.</li>
+                                <li>Оновила <strong>25+ існуючих статей</strong>.</li>
+                                <li>Створила <strong>SOP</strong> для створення та редагування статей.</li>
+                            </ul>
+                        </div>
+                    `;
                 } else {
-                    captionText.innerHTML = title;
+                    // Якщо якийсь інший кейс - базовий опис
+                    detailHTML = `
+                        <div class="case-study-detail">
+                            <h3 style="font-size:1.6em;color:#fff;margin-bottom:12px;">${title}</h3>
+                            <p>Детальний опис роботи можна переглянути у наданих документах.</p>
+                        </div>
+                    `;
                 }
+                captionText.innerHTML = detailHTML;
+            } else {
+                // Для звичайних зображень (не кейс-стаді) – виводимо тільки заголовок
+                captionText.innerHTML = title;
             }
         }
+    }
 
-        var span = document.getElementsByClassName("close")[0];
-        span.onclick = function() {
+    // Отримання кнопки закриття (x)
+    var span = document.getElementsByClassName("close")[0];
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Закрити модальне вікно, якщо клік поза зображенням
+    window.onclick = function(event) {
+        if (event.target == modal) {
             modal.style.display = "none";
         }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
+    }
+</script>
 </body>
 </html>
