@@ -127,7 +127,9 @@
     }
     .portfolio-item img {
         width: 100%;
-        height: auto;
+        height: 150px;
+        object-fit: cover;
+        object-position: center;
         display: block;
         transition: transform 0.5s ease-in-out;
     }
@@ -145,7 +147,22 @@
         font-size: 0.9em;
         color: #555;
     }
-    /* Modal styles (для спливаючого вікна) */
+    .portfolio-info .metrics {
+        font-size: 0.85em;
+        color: #a90534;
+        font-weight: 600;
+        margin-top: 6px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px 14px;
+    }
+    .portfolio-info .metrics span {
+        background: #f7e0e5;
+        padding: 2px 10px;
+        border-radius: 12px;
+    }
+
     .modal {
         display: none;
         position: fixed;
@@ -190,97 +207,53 @@
         text-decoration: none;
         cursor: pointer;
     }
- .portfolio-section {
-        padding: 60px 0;
-        background-color: #f4f7f6;
-        text-align: center;
+
+    .case-study-detail {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: left;
+        color: #ddd;
+        padding: 20px 0;
+        line-height: 1.7;
     }
-    .portfolio-section .section-title {
-        margin-bottom: 40px;
+    .case-study-detail h4 {
+        color: #fff;
+        font-size: 1.3em;
+        margin: 16px 0 8px;
     }
-    .portfolio-grid {
+    .case-study-detail ul {
+        padding-left: 24px;
+        margin: 8px 0 12px;
+    }
+    .case-study-detail ul li {
+        margin-bottom: 4px;
+    }
+    .case-study-detail .highlight-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
-        padding: 0 20px;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 12px;
+        margin: 16px 0;
     }
-    .portfolio-item {
-        position: relative;
-        overflow: hidden;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    }
-    .portfolio-item:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
-.portfolio-item img {
-    width: 100%;
-    height: 150px;
-object-fit: cover;
-object-position: center;
-display: block;
-transition: transform 0.5s ease-in-out;
-}
-    .portfolio-info {
-        padding: 15px;
+    .case-study-detail .highlight-grid .stat {
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        padding: 14px 10px;
         text-align: center;
-        background-color: #fff;
     }
-    .portfolio-info h3 {
-        margin: 0 0 5px 0;
-        font-size: 1.2em;
+    .case-study-detail .highlight-grid .stat .number {
+        font-size: 1.8em;
+        font-weight: 700;
+        color: #ff6b8a;
     }
-    .portfolio-info p {
-        margin: 0;
+    .case-study-detail .highlight-grid .stat .label {
+        font-size: 0.85em;
+        color: #aaa;
+        margin-top: 2px;
+    }
+    .case-study-detail .highlight-grid .stat .change {
         font-size: 0.9em;
-        color: #555;
-    }
-    /* Стилі для модального вікна */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.9);
-        padding-top: 60px;
-    }
-    .modal-content {
-        margin: auto;
-        display: block;
-        width: 80%;
-        max-width: 1200px;
-        border-radius: 8px;
-    }
-    #caption {
-        margin: auto;
-        display: block;
-        width: 80%;
-        max-width: 1200px;
-        text-align: center;
-        color: #ccc;
-        padding: 10px 0;
-        height: 150px;
-    }
-    .close {
-        position: absolute;
-        top: 15px;
-        right: 35px;
-        color: #f1f1f1;
-        font-size: 40px;
-        font-weight: bold;
-        transition: 0.3s;
-    }
-    .close:hover,
-    .close:focus {
-        color: #bbb;
-        text-decoration: none;
-        cursor: pointer;
+        color: #6fcf97;
+        font-weight: 600;
     }
 </style>
     
@@ -298,11 +271,11 @@ transition: transform 0.5s ease-in-out;
                 <span>📍 Дніпро, Україна</span>
             </div>
         </header>
-<nav class="lang-switcher absolute top-4 right-4 text-sm font-semibold">
-    <a href="index.html" class="active text-[#a90534]">Укр</a>
-    <span class="text-gray-400">|</span>
-    <a href="index-en.html" class="hover:text-[#a90534]">Eng</a>
-</nav>
+        <nav class="lang-switcher absolute top-4 right-4 text-sm font-semibold">
+            <a href="index.html" class="active text-[#a90534]">Укр</a>
+            <span class="text-gray-400">|</span>
+            <a href="index-en.html" class="hover:text-[#a90534]">Eng</a>
+        </nav>
         <!-- Professional Summary -->
         <section class="card">
             <h2 class="section-title text-2xl font-semibold">Професійний огляд</h2>
@@ -618,102 +591,131 @@ transition: transform 0.5s ease-in-out;
             </div>
         </section>
 
-<section id="portfolio" class="portfolio-section">
-    <div class="container">
-        <h2 class="section-title">Приклади моїх робіт</h2>
-        <div class="portfolio-grid">
-<div class="portfolio-item">
-    <a href="https://blog.divebooker.com/wp-content/uploads/2026/07/Pacific-Dive-Calendar-final.pdf" 
-       class="portfolio-link external" 
-       target="_blank" 
-       rel="noopener noreferrer"
-       style="display: block; text-decoration: none; color: inherit;">
-        <img src="pacific-dive-calendar.jpg" alt="Тихоокеанський дайв-календар – PDF">
-        <div class="portfolio-info">
-            <h3>Тихоокеанський дайв-календар</h3>
-            <p>Інтерактивний PDF-календар для дайверів з вибором найкращих напрямків, умов та сезонів.</p>
-        </div>
-    </a>
-</div>
-            <div class="portfolio-item">
-                <a href="#" class="portfolio-link" data-fullsize="pride-auto-transport.jpg" data-title="Pride Auto Transport">
-                    <img src="pride-auto-transport.jpg" alt="Сайт Pride Auto Transport">
-                </a>
-                <div class="portfolio-info">
-                    <h3>Pride Auto Transport</h3>
-                    <p>Вебсайт для компанії, що займається перевезенням автомобілів.</p>
-                </div>
-            </div>
-            
-            <div class="portfolio-item">
-                <a href="#" class="portfolio-link" data-fullsize="Compare-The-Carrier-Your-Truster-Logistics-Navigator.png" data-title="Compare The Carrier (Головна сторінка)">
-                    <img src="Compare-The-Carrier-Your-Truster-Logistics-Navigator.png" alt="Сайт Compare The Carrier - Logistics Navigator">
-                </a>
-                <div class="portfolio-info">
-                    <h3>Compare The Carrier (Головна сторінка)</h3>
-                    <p>Дизайн головної сторінки для логістичної компанії.</p>
-                </div>
-            </div>
+        <!-- ===== PORTFOLIO SECTION ===== -->
+        <section id="portfolio" class="portfolio-section">
+            <div class="container">
+                <h2 class="section-title">Приклади моїх робіт</h2>
+                <div class="portfolio-grid">
 
-            <div class="portfolio-item">
-                <a href="#" class="portfolio-link" data-fullsize="compare-carrier-blog.png" data-title="Compare The Carrier (Блог)">
-                    <img src="compare-carrier-blog.png" alt="Блог Compare The Carrier">
-                </a>
-                <div class="portfolio-info">
-                    <h3>Compare The Carrier (Блог)</h3>
-                    <p>Розділ блогу з корисними статтями. Їх написання, наповнення та публікація.</p>
+                    <!-- ===== DIVEBOOKER CASE STUDY (УКРАЇНСЬКОЮ) ===== -->
+                    <div class="portfolio-item">
+                        <a href="#" class="portfolio-link case-study-link" data-fullsize="divebooker-case-study.jpg" data-title="Divebooker.com — Кейс зростання органічного пошуку">
+                            <img src="divebooker-case-study.jpg" alt="Divebooker.com — показники органічного пошуку">
+                        </a>
+                        <div class="portfolio-info">
+                            <h3>Divebooker.com — SEO-зростання</h3>
+                            <p>Органічний пошук — гру 2025 – чер 2026</p>
+                            <div class="metrics">
+                                <span>📈 +35.5% кліків</span>
+                                <span>👁️ +35.6% показів</span>
+                                <span>📍 12.1 → 9.8 позиція</span>
+                                <span>📄 46 статей</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pacific Dive Calendar (external PDF) -->
+                    <div class="portfolio-item">
+                        <a href="https://blog.divebooker.com/wp-content/uploads/2026/07/Pacific-Dive-Calendar-final.pdf" 
+                           class="portfolio-link external" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           style="display: block; text-decoration: none; color: inherit;">
+                            <img src="pacific-dive-calendar.jpg" alt="Тихоокеанський дайв-календар – PDF">
+                            <div class="portfolio-info">
+                                <h3>Тихоокеанський дайв-календар</h3>
+                                <p>Інтерактивний PDF-календар для дайверів з вибором найкращих напрямків, умов та сезонів.</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Pride Auto Transport -->
+                    <div class="portfolio-item">
+                        <a href="#" class="portfolio-link" data-fullsize="pride-auto-transport.jpg" data-title="Pride Auto Transport">
+                            <img src="pride-auto-transport.jpg" alt="Сайт Pride Auto Transport">
+                        </a>
+                        <div class="portfolio-info">
+                            <h3>Pride Auto Transport</h3>
+                            <p>Вебсайт для компанії, що займається перевезенням автомобілів.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Compare The Carrier (Homepage) -->
+                    <div class="portfolio-item">
+                        <a href="#" class="portfolio-link" data-fullsize="Compare-The-Carrier-Your-Truster-Logistics-Navigator.png" data-title="Compare The Carrier (Головна сторінка)">
+                            <img src="Compare-The-Carrier-Your-Truster-Logistics-Navigator.png" alt="Сайт Compare The Carrier - Logistics Navigator">
+                        </a>
+                        <div class="portfolio-info">
+                            <h3>Compare The Carrier (Головна сторінка)</h3>
+                            <p>Дизайн головної сторінки для логістичної компанії.</p>
+                        </div>
+                    </div>
+
+                    <!-- Compare The Carrier (Blog) -->
+                    <div class="portfolio-item">
+                        <a href="#" class="portfolio-link" data-fullsize="compare-carrier-blog.png" data-title="Compare The Carrier (Блог)">
+                            <img src="compare-carrier-blog.png" alt="Блог Compare The Carrier">
+                        </a>
+                        <div class="portfolio-info">
+                            <h3>Compare The Carrier (Блог)</h3>
+                            <p>Розділ блогу з корисними статтями. Їх написання, наповнення та публікація.</p>
+                        </div>
+                    </div>
+
+                    <!-- Compare The Carrier (Cases) -->
+                    <div class="portfolio-item">
+                        <a href="#" class="portfolio-link" data-fullsize="compare-carrier-cases.png" data-title="Compare The Carrier (Кейси)">
+                            <img src="compare-carrier-cases.png" alt="Кейси Compare The Carrier">
+                        </a>
+                        <div class="portfolio-info">
+                            <h3>Compare The Carrier (Кейси)</h3>
+                            <p>Огляд експертизи та успішних проєктів компанії.</p>
+                        </div>
+                    </div>
+
+                    <!-- Compare The Carrier (YouTube) -->
+                    <div class="portfolio-item">
+                        <a href="#" class="portfolio-link" data-fullsize="compare-carrier-youtube.png" data-title="Compare The Carrier (YouTube)">
+                            <img src="compare-carrier-youtube.png" alt="YouTube-канал Compare The Carrier">
+                        </a>
+                        <div class="portfolio-info">
+                            <h3>Compare The Carrier (YouTube)</h3>
+                            <p>Створення відео для YouTube-каналу компанії.</p>
+                        </div>
+                    </div>
+
+                    <!-- Drayage Service -->
+                    <div class="portfolio-item">
+                        <a href="#" class="portfolio-link" data-fullsize="Drayage-Service-–-GetCarrier-LLC-Full-Service-asset-based-3PL.png" data-title="Drayage Service (GetCarrier)">
+                            <img src="Drayage-Service-–-GetCarrier-LLC-Full-Service-asset-based-3PL.png" alt="Сайт Drayage Service">
+                        </a>
+                        <div class="portfolio-info">
+                            <h3>Drayage Service (GetCarrier)</h3>
+                            <p>Наповнення розділу сайту, присвяченого послугам з перевезення контейнерів.</p>
+                        </div>
+                    </div>
+
+                    <!-- Instagram Profiles -->
+                    <div class="portfolio-item">
+                        <a href="#" class="portfolio-link" data-fullsize="instagram-profiles.png" data-title="Приклади Instagram профілів">
+                            <img src="instagram-profiles.png" alt="Instagram-профілі">
+                        </a>
+                        <div class="portfolio-info">
+                            <h3>Instagram профілі</h3>
+                            <p>Приклади оформлення та наповнення Instagram-профілів для різних клієнтів.</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-
-            <div class="portfolio-item">
-                <a href="#" class="portfolio-link" data-fullsize="compare-carrier-cases.png" data-title="Compare The Carrier (Кейси)">
-                    <img src="compare-carrier-cases.png" alt="Кейси Compare The Carrier">
-                </a>
-                <div class="portfolio-info">
-                    <h3>Compare The Carrier (Кейси)</h3>
-                    <p>Огляд експертизи та успішних проєктів компанії.</p>
-                </div>
-            </div>
-
-            <div class="portfolio-item">
-                <a href="#" class="portfolio-link" data-fullsize="compare-carrier-youtube.png" data-title="Compare The Carrier (YouTube)">
-                    <img src="compare-carrier-youtube.png" alt="YouTube-канал Compare The Carrier">
-                </a>
-                <div class="portfolio-info">
-                    <h3>Compare The Carrier (YouTube)</h3>
-                    <p>Створення відео для YouTube-каналу компанії.</p>
-                </div>
-            </div>
-
-            <div class="portfolio-item">
-                <a href="#" class="portfolio-link" data-fullsize="Drayage-Service-–-GetCarrier-LLC-Full-Service-asset-based-3PL.png" data-title="Drayage Service (GetCarrier)">
-                    <img src="Drayage-Service-–-GetCarrier-LLC-Full-Service-asset-based-3PL.png" alt="Сайт Drayage Service">
-                </a>
-                <div class="portfolio-info">
-                    <h3>Drayage Service (GetCarrier)</h3>
-                    <p>Наповнення розділу сайту, присвяченого послугам з перевезення контейнерів.</p>
-                </div>
-            </div>
-
-            <div class="portfolio-item">
-                <a href="#" class="portfolio-link" data-fullsize="instagram-profiles.png" data-title="Приклади Instagram профілів">
-                    <img src="instagram-profiles.png" alt="Instagram-профілі">
-                </a>
-                <div class="portfolio-info">
-                    <h3>Instagram профілі</h3>
-                    <p>Приклади оформлення та наповнення Instagram-профілів для різних клієнтів.</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
+        </section>
         
-<div id="imageModal" class="modal">
-    <span class="close">&times;</span>
-    <img class="modal-content" id="modalImage">
-    <div id="caption"></div>
-</div>
+        <!-- ===== MODAL ===== -->
+        <div id="imageModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="modalImage">
+            <div id="caption"></div>
+        </div>
         
         <!-- Education & Languages Section (Combined) -->
         <section class="card">
@@ -844,61 +846,60 @@ transition: transform 0.5s ease-in-out;
             });
         });
     </script>
-<script>
-    // Отримання модального вікна
-    var modal = document.getElementById("imageModal");
+    <script>
+        // Modal logic
+        var modal = document.getElementById("imageModal");
+        var modalImg = document.getElementById("modalImage");
+        var captionText = document.getElementById("caption");
 
-    // Отримання зображення та підпису в модальному вікні
-    var modalImg = document.getElementById("modalImage");
-    var captionText = document.getElementById("caption");
+        var links = document.getElementsByClassName("portfolio-link");
+        for (var i = 0; i < links.length; i++) {
+            if (links[i].classList.contains("external")) {
+                continue;
+            }
+            links[i].onclick = function(event) {
+                event.preventDefault();
+                modal.style.display = "block";
+                modalImg.src = this.getAttribute("data-fullsize");
+                var title = this.getAttribute("data-title") || "";
 
-    // Отримання всіх посилань на зображення
-  var links = document.getElementsByClassName("portfolio-link");
-for (var i = 0; i < links.length; i++) {
-    // Пропускаємо зовнішні посилання (з класом "external")
-    if (links[i].classList.contains("external")) {
-        continue;
-    }
-    links[i].onclick = function(event) {
-        event.preventDefault();
-        modal.style.display = "block";
-        modalImg.src = this.getAttribute("data-fullsize");
-        captionText.innerHTML = this.getAttribute("data-title");
-    }
-}
+                // If this is the case study, inject detailed Ukrainian content
+                if (this.classList.contains("case-study-link")) {
+                    captionText.innerHTML = `
+                            <div class="case-study-detail">
+                                <h3 style="font-size:1.6em;color:#fff;margin-bottom:12px;">${title}</h3>
+                                <div class="highlight-grid">
+                                    <div class="stat"><div class="number">+35.5%</div><div class="label">Органічні кліки</div></div>
+                                    <div class="stat"><div class="number">+35.6%</div><div class="label">Покази</div></div>
+                                    <div class="stat"><div class="number" style="color:#ffb347;">12.1 → 9.8</div><div class="label">Середня позиція <span style="color:#aaa;font-size:0.8em;">(менше краще)</span></div></div>
+                                    <div class="stat"><div class="number" style="color:#6fcf97;">46</div><div class="label">Опубліковано статей</div></div>
+                                </div>
+                                <h4>📈 Що сприяло зростанню</h4>
+                                <ul>
+                                    <li><strong>46 SEO-оптимізованих статей</strong>, включаючи 4 кластери контенту за напрямками (Червоне море, Кариби, Галапагоси, Індонезія) та серію <em>"Де пірнати у [Місяць]"</em>.</li>
+                                    <li>Розробила та впровадила <strong>нову структуру блогу</strong> на всьому сайті.</li>
+                                    <li>Оновила <strong>25+ існуючих статей</strong>: очистила параметри відстеження та додала внутрішні посилання зі статей на сторінки країн/напрямків.</li>
+                                    <li>Створила та задокументувала <strong>SOP</strong> для створення та редагування статей, щоб стандартизувати дослідження ключових слів, брифінг та публікацію.</li>
+                                </ul>
+                                <p style="margin-top:12px;color:#aaa;font-size:0.9em;">📊 Джерело: Google Search Console (веб-пошук, останні 12 місяців, divebooker.com) — грудень 2025 vs червень 2026.</p>
+                            </div>
+                        `;
+                } else {
+                    captionText.innerHTML = title;
+                }
+            }
+        }
 
-    // Отримання кнопки закриття (x)
-    var span = document.getElementsByClassName("close")[0];
-
-    // Коли користувач клікає на (x), закрити модальне вікно
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // Закрити модальне вікно, якщо клік поза зображенням
-    window.onclick = function(event) {
-        if (event.target == modal) {
+        var span = document.getElementsByClassName("close")[0];
+        span.onclick = function() {
             modal.style.display = "none";
         }
-    }
-</script>
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
